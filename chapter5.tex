@@ -1,0 +1,392 @@
+\chapter{Phương trình vi phân I-tô}
+\section{Phương trình vi phân ngẫu nhiên}
+\begin{defn}[Phương trình vi phân ngẫu nhiên]
+    Cho $X = (X_t)_{t \in [0, T]}$ là một quá trình ngẫu nhiên. Khi đó phương trình 
+    \begin{align}\label{defn ptvpnn}
+        dX_t &= a(t,X_t) dt + \sigma(t,X_t)dB_t, \quad t\in [0,T]\\
+        X_0  &= x \in \R. \nonumber
+    \end{align}
+\end{defn}
+\begin{defn}
+    Quá trình ngẫu nhiên $X = (X_t)_{t\in [0,T]}$ được gọi là nghiệm của phương trình vi phân ngẫu nhiên \ref{defn ptvpnn} nếu 
+    \begin{enumerate}
+        \item $X$ là $\ff-$tương thích, tức $X_t$ là $\ff_t-$đo được.
+        \item Các tích phân $\displaystyle \int_0^t{a(s,X_s)ds}$ và $\displaystyle \int_0^t{\sigma(s,X_s)dB_s}$ tồn tại và thoả mãn 
+        \[X_t = x + \int_0^t{a(s,X_s)ds} + \int_0^t{\sigma(s,X_s)dB_s}\quad \forall t \in [0,T].\]
+    \end{enumerate}
+\end{defn}
+\section{Phương trình tuyến tính tổng quát}
+\begin{defn}[Phương trình tuyến tính tổng quát]
+    Phương trình tuyến tính tổng quát có dạng
+    \begin{align*}
+        dX_t &= (a(t)+b(t)X_t)dt + (c(t)+e(t)X_t)dB_t\\
+        X_0&= x \in \R.
+    \end{align*}
+\end{defn}
+\begin{sol*}
+    \begin{enumerate}
+        \item Xét phương trình 
+        \begin{align*}
+            dY_t &= b(t)Y_tdt + e(t)Y_tdB_t \quad \forall t \in [0,T]\\
+            Y_0 &= 1.
+        \end{align*}
+        Áp dụng công thức vi phân I-tô cho $Z_t = \ln{Y_t}$ ta được
+        \begin{align*}
+            dZ_t &= \dfrac{1}{Y_t}dY_t + \dfrac{1}{2}\dfrac{-1}{Y_t^2}(dY_t)^2\\
+            &= \dfrac{b(t)Y_tdt + e(t)Y_tdB_t}{Y_t} + \dfrac{-1}{2Y_t^2}(b(t)Y_tdt + e(t)Y_tdB_t)^2\\
+            &= b(t)dt + e(t)dB_t - \dfrac{e^2(t)}{2}dt\\
+            &= \left(b(t)- \dfrac{e^2(t)}{2}\right)dt + e(t)dB_t.
+        \end{align*}
+        Từ đó thu được
+        \begin{align*}
+            Z_t &= Z_0 + \int_0^t{\left(b(s)- \dfrac{e^2(s)}{2}\right)ds} + \int_0^t{e(s)dB_s}  \\
+            Z_0 &= \ln{Y_0} = \ln{1} = 0.
+        \end{align*}
+        Do đó \[Y_t = \exp{Z_t} = \exp\left(\int_0^t{\left(b(s)- \dfrac{e^2(s)}{2}\right)ds} + \int_0^t{e(s)dB_s}\right).\]
+        \item Đặt $U_t = \dfrac{X_t}{Y_t}$, áp dụng công thức vi phân I-tô ta được
+        \begin{align*}
+            dU_t &= \dfrac{1}{Y_t}dX_t + \dfrac{-X_t}{Y_t^2}dY_t + \dfrac{1}{2}\left(0\cdot (dX_t)^2 + 2\cdot \dfrac{-1}{Y_t^2}dX_tdY_t + \dfrac{2X_t}{Y_t^3}(dY_t)^2\right).
+        \end{align*}
+        Trong đó $dX_tdY_t = e(t)Y_t[c(t)+e(t)X_t]dt$ và $(dY_t)^2 = e^2(t)Y_t^2dt$, nên
+        \begin{align*}
+            dU_t &= \left(\dfrac{a(t)-c(t)e(t)}{Y_t}\right)dt + \dfrac{c(t)}{Y_t}dB_t\\
+            U_t  &= U_0 + \int_0^t \left(\dfrac{a(s)-c(s)e(s)}{Y_s}\right)ds + \int_0^t\dfrac{c(s)}{Y_s}dB_s\\
+            U_0 &= \dfrac{X_0}{Y_0} = x.
+        \end{align*}
+        Từ đó ta thu được $X_t = U_tY_t$.
+    \end{enumerate}
+\end{sol*}
+\begin{exam*}
+    Giải các phương trình sau
+    \begin{enumerate}
+        \item 
+        $\begin{cases}
+            dX_t &= -X_tdt + dB_t, \quad t\in [0,T] \\
+            X_0 &=  x
+         \end{cases}$
+        \item 
+        $\begin{cases}
+            dX_t &= 2dt + X_tdB_t, \quad t\in [0,T] \\
+            X_0 &=  x
+        \end{cases}$
+    \end{enumerate}
+\end{exam*}
+\begin{sol*}
+\begin{enumerate}
+    \item Xét phương trình: 
+    $\begin{cases}
+            dY_t &= -Y_tdt \\
+            Y_0 &=  1
+    \end{cases}$\\
+    Đặt: $Z_t = lnY_t$. Áp dụng công thức vi phân Itô ta có
+    \[dZ_t = \dfrac{1}{Y_t}dY_t -\dfrac{1}{2Y_t^2}(dY_t)^2 = -dt.\] Suy ra \[Z_t = Z_0 + \displaystyle\int\limits_0^t-sds = -t.\] Do đó $Y_t = e^{-t}.$\\
+    Đặt: $U_t = \dfrac{X_t}{Y_t}$ thì $\begin{cases}
+            dU_t &= \Big(\dfrac{0}{Y_t} - \dfrac{1\cdot 0}{Y_t}\Big)dt + \dfrac{1}{Y_t}dB_t = e^tdB_t \\
+            U_0 &=  \dfrac{X_0}{Y_0} = x
+    \end{cases}$\\
+    Suy ra $U_t = x + \displaystyle\int\limits_0^te^sdB_s$\\
+    Vậy $X_t = Y_t \cdot U_t = e^{-t}\bigg(x+\displaystyle\int\limits_0^te^sdB_s\bigg) = xe^{-t} + \displaystyle\int\limits_0^t e^{-(t-s)}dB_s.$\\
+    \remarkname: \begin{align*}
+        \E X_t &= xe^{-t}\\
+        \Var(X_t) &= E(X_t - EX_t)^2\\
+        &= \E\bigg(\displaystyle\int\limits_0^t e^{-(t-s)}dB_s\bigg)^2\\
+        &= \E\bigg(\displaystyle\int\limits_0^t e^{-2(t-s)}ds\bigg)\\
+        &= \displaystyle\int\limits_0^t e^{-2(t-s)}ds\\
+        &= \dfrac{1-e^{-2t}}{2}.
+    \end{align*}
+    \item Xét phương trình
+    $\begin{cases}
+            dY_t &= Y_tdB_t \\
+            Y_0 &=  1
+    \end{cases}$\\
+    Đặt: $Z_t = \ln Y_t$. Áp dụng công thức vi phân Itô, ta có
+    \begin{align*}
+        dZ_t &= \dfrac{1}{Y_t}dY_t - \dfrac{1}{2Y_t^2}(dY_t)^2\\
+        &= dB_t - \dfrac{1}{2Y_t^2}Y_t^2dt\\
+        &= dB_t\\
+        &=\dfrac{1}{2}dt.
+    \end{align*}
+    Do đó
+    \begin{align*}
+        Z_t &= Z_0 + \displaystyle\int\limits_0^tdB_s -\dfrac{1}{2}\displaystyle\int\limits_0^t ds\\
+        &= -\dfrac{1}{2}t + \displaystyle\int\limits_0^tdB_s\\
+        &= -\dfrac{1}{2}t + B_t.
+    \end{align*}
+    Nên \[Y_t = e^{-\dfrac{1}{2}t + B_t}.\]
+    Xét $U_t = \dfrac{X_t}{Y_t.}$ Áp dụng công thức Itô, ta có: \[dU_t = \bigg(\dfrac{2}{Y_t} - \dfrac{0}{Y_t}\bigg)dt + \dfrac{0}{Y_t}dB_t = \dfrac{2}{Y_t}dt\]
+    Do đó 
+    \begin{align*}
+        U_t &= U_0 + 2\displaystyle\int\limits_0^t\dfrac{1}{Y_s}ds\\
+        &= x + 2\displaystyle\int\limits_0^t\dfrac{1}{Y_s}ds\\
+        &= x + 2\displaystyle\int\limits_0^t e^{\dfrac{s}{2} - B_s}ds.
+    \end{align*}
+    Vậy $X_t = Y_t \cdot U_t = e^{-\dfrac{1}{2}t + B_t}\bigg(x + 2\displaystyle\int\limits_0^t e^{\dfrac{s}{2} - B_s}ds\bigg).$
+\end{enumerate}    
+\end{sol*}
+\section{Phương trình bán tuyến tính}
+\begin{defn}[Phương trình bán tuyến tính] Phương trình bán tuyến tính có dạng    
+        \[\begin{cases}
+            dX_t &= b(t,X_t)dt+ \sigma(t) X_t dB_t, t \in [0,T]\\
+            X_0 &= x \in \R
+         \end{cases}\]     
+\end{defn} 
+\begin{sol*} 
+    \begin{enumerate}
+        \item Xét \qtnn:
+        \[Y_t = \exp \left(-\int\limits_0^t \sigma(s) dB_s + \dfrac{1}{2} \int\limits_0^t \sigma^2(s) ds \right). \]
+        Áp dụng công thức vi phân I-tô ta có:
+        \begin{align*}
+            dY_t &= Y_t \left(-\sigma(t) dB_t + \dfrac{1}{2} \sigma^2(t) dt \right) + \dfrac{1}{2} Y_t \sigma^2(t) dt \\
+            &= \sigma^2(t) Y_t dt - \sigma(t) Y_t dB_t.           
+        \end{align*}
+        \item Xét $X_t = X_t \cdot Y_t$. Áp dụng công thức vi phân Itô ta có:
+        \begin{align*}
+            dZ_t &= Y_t dX_t + X_t dY_t + dX_t dY_t\\
+            &= Y_t \left(b(t,X_t)dt + \sigma(t) X_t dB_t \right) + X_t \left( \sigma^2(t) Y_t dt - \sigma(t) Y_t dB_t  \right) - \sigma^2(t) X_t Y_t dt  \\
+            &= Y_t b(t,X_t) dy.
+        \end{align*}
+        Như vậy, $Z_t$ là nghiệm của phương trình vi phân tất định
+        \[dZ_t = Y_t b\left(t, \dfrac{Z_t}{Y_t} \right) dt.\]
+        Tuỳ vào hàm $b(t,X_t)$ ta có thể tìm $Z_t$ tường minh. Khi đó kết luận nghiệm là $X_t = \dfrac{Z_t}{Y_t}$.
+    \end{enumerate}
+\end{sol*}
+\examplename. Giải phương trình: 
+\[\begin{cases}
+    dX_t &= \dfrac{dt}{X_t} + X_t dB_t, t \in [0,t]\\
+    X_0 &= x >0.
+\end{cases}\]
+\begin{sol*}
+    Xét \qtnn: \[Y_t = \exp \left(-\int\limits_0^t 1 dB_s + \dfrac{1}{2} \int\limits_0^t 1^2 ds \right) = \e^{\dfrac{t}{2} - B_t}. \]
+    Coi $Y_t = f(t,B_t) = \e^{\dfrac{t}{2} - B_t}$. Áp dụng công thức vi phân Itô ta có:
+    \begin{align*}
+        dY_t &= \dfrac{1}{2} \e^{\dfrac{t}{2} - B_t} dt - \e^{\dfrac{t}{2} - B_t} dB_t + \dfrac{1}{2} \e^{\dfrac{t}{2} - B_t} dt \\
+        &= \e^{\dfrac{t}{2} - B_t} dt - \e^{\dfrac{t}{2} - B_t} dB_t \\
+        &= Y_t dt - Y_t dB_t.
+    \end{align*}
+    Xét $Z_t = X_t \cdot Y_t$. Áp dụng công thức vi phân Itô ta có:
+    \begin{align*}
+        dZ_t &= Y_t \left(\dfrac{dt}{X_t} + X_t dB_t \right) + X_t (Y_t dt - Y_t dB_t) - X_t Y_t dt\\
+        &= \dfrac{Y_t}{X_t} dt.
+    \end{align*}
+    Thay $X_t = \dfrac{Z_t}{Y_t}$ vào biểu thức trên ta được:
+    \begin{align*}
+         dZ_t & = \dfrac{Y_t^2}{Z_t} dt \\
+         Z_t dZ_t &= Y_t^2 dt \\
+         \int\limits_0^t Z_s dZ_s &= \int\limits_0^t Y_s^2 ds \\        
+         \dfrac{Z_s^2}{2} \big|_0^t &= \int\limits_0^t \e^{s-2B_s}ds.
+    \end{align*}
+    Do đó:
+    \begin{align*}
+        Z_t^2 &= Z_0^2 + 2\int\limits_0^t \e^{s-2B_s}ds\\
+        &= x^2 + 2\int\limits_0^t \e^{s-2B_s}ds.
+    \end{align*}
+    Vì $X_0 = x>0$ nên \[Z_t = \sqrt{x^2 + 2\int\limits_0^t \e^{s-2B_s}ds}.\]
+    Vậy nghiệm cần tìm là:
+    \[X_t = \dfrac{Z_t}{Y_t} = \dfrac{\sqrt{x^2 + 2\int\limits_0^t \e^{s-2B_s}ds}}{\e^{\dfrac{t}{2} - B_t}}.\]
+\end{sol*}
+\examplename: Giải các phương trình sau:
+\begin{enumerate}
+    \item $\begin{cases}
+        dX_t &= X_t^\alpha dt + \sigma X_t dB_T, t \in [0,T] \\
+        X_0 &= x > 0
+    \end{cases}$, với $\alpha, \sigma$ là các hằng số thực.
+    \item $\begin{cases}
+        dX_t &= K(\alpha - \ln X_t)X_t dt + \sigma X_t dB_T, t \in [0,T] \\
+        X_0 &= x > 0
+    \end{cases}$, với $K, \alpha, \sigma > 0$.
+\end{enumerate}
+\section{Phương trình vi phân tất định}
+Xét phương trình vi phân tất định
+\begin{align*}
+    dx_t &= x_t(b+ax_t)dt\quad a,b \in \R,\\
+    x_0 &= x >0,
+\end{align*}
+có nghiệm 
+\[ x_t = \dfrac{b}{-a+e^{-bt}\dfrac{b+ax}{x}}\cdot\]
+Nếu $a<0<b$ thì $-a+e^{-bt}\dfrac{b+ax}{x} = a(e^{-bt}-1)+\dfrac{be^{-bt}}{x} >0$, khi đó $x_t$ luôn tồn tại với mọi $t \geq 0$. Nếu $a,b>0$ thì $x_t$ chỉ tồn tại từ $t = 0$ cho đến thời điểm $T = \dfrac{-1}{b}\ln{\dfrac{ax}{ax+b}}$.
+
+Bằng cách thêm một yếu tố ngẫu nhiên, ta xét phương trình vi phân ngẫu nhiên sau
+\begin{align*}
+    dX_t &= X_t(b+aX_t)dt + \varepsilon X_t^2dB_t\\
+    X_0 &= x >0\\
+    a,b,\varepsilon & \in \R.
+\end{align*}
+Ta sẽ chỉ ra phương trình trên luôn có nghiệm hữu hạn với mọi $t \geq 0$.
+\subsection{Sự tồn tại và tính duy nhất nghiệm}
+\begin{lem}[Gronwall]
+    Giả sử hàm $u: [a,b] \to \R$ là một hàm không âm thoả mãn 
+    \[u(t) \leq \varepsilon + m\int_0^tu(s)ds\quad \forall t \in [a,b]\]
+    với $\varepsilon, m >0$. Khi đó ta có ước lượng sau
+    \[u(t) \leq \varepsilon e^{t-a} \quad \forall t\in [a,b].\]
+\end{lem}
+\begin{thm}
+    Nếu phương trình vi phân ngẫu nhiên
+    \begin{align*}
+        dX_t &= b(t,X_t)dt + \sigma(t,X_t)dB_t,~t \in [0,T]\\
+        X_0 &= x \in \R
+    \end{align*}
+    Với $b, \sigma: [0,T]\times \R \to \R$ thoả mãn tồn tại $L  > 0$ sao cho
+    \begin{enumerate}
+        \item (Tính chất Lipchitz)
+        \[|b(t,x)-b(t,y)|+ |\sigma(t,x)-\sigma(t,y)| \leq L|x-y|~\forall t\in [0,T],~x,y\in \R.\]
+        \item (Tính chất tăng trưởng tuyến tính)
+        \[|b(t,x)| + |\sigma(t,x)| \leq L(1+|x|) ~\forall t \in [0,T],x\in \R.\]
+    \end{enumerate}
+    thì nó luôn có nghiệm duy nhất.
+\end{thm}
+\begin{proof}
+\begin{enumerate}
+    \item (Tính duy nhất nghiệm)\\
+    Giả sử $(X_t)_{t \in [0,T]}$ và $(Y_t)_{t \in [0,T]}$ là hai nghiệm của phương trình trên. Khi đó với mọi $t \in [0,T]$ thì
+    \begin{align*}
+        X_t &= x + \int_0^t{b(s,X_s)ds} + \int_0^t{\sigma(s,X_s)dB_s}\\
+        Y_t &= x + \int_0^t{b(s,Y_s)ds} + \int_0^t{\sigma(s,Y_s)dB_s}.
+    \end{align*}
+    Do đó 
+    \[X_t-Y_t = \int_0^t{[b(s,X_s)-b(s,Y_s)]ds} + \int_0^t{[\sigma(s,X_s)-\sigma(s,Y_s)]dB_s}.\]
+    Suy ra 
+    \[|X_t-Y_t| \leq \int_0^t{\left|b(s,X_s)-b(s,Y_s)\right|ds} + \left|\int_0^t{[\sigma(s,X_s)-\sigma(s,Y_s)]dB_s}\right|.\]
+    Dẫn đến 
+    \[|X_t-Y_t|^2 \leq 2\left[\int_0^t{\left|b(s,X_s)-b(s,Y_s)\right|ds}\right]^2 + 2\left[\int_0^t{[\sigma(s,X_s)-\sigma(s,Y_s)]dB_s}\right]^2.\]
+    Mà theo bất đẳng thức Holder ta có
+    \[\int_0^t{\left|b(s,X_s)-b(s,Y_s)\right|ds} \leq \left(\int_0^t{\left|b(s,X_s)-b(s,Y_s)\right|^2ds}\right)^{1/2} \left(\int_0^t{1^2ds}\right)^{1/2}\]
+    Suy ra 
+    \begin{align*}
+        \left[\int_0^t{\left|b(s,X_s)-b(s,Y_s)\right|ds}\right]^2 
+        &\leq t\int_0^t{\left|b(s,X_s)-b(s,Y_s)\right|^2ds}\\
+        &\leq t\int_0^t{L^2\left|X_s-Y_s\right|^2ds}
+    \end{align*}
+    Còn theo công thức đẳng cự I-tô thì
+    \begin{align*}
+        \E\left[\int_0^t{[\sigma(s,X_s)-\sigma(s,Y_s)]dB_s}\right]^2 
+        &= \E\int_0^t{[\sigma(s,X_s)-\sigma(s,Y_s)]^2ds}\\
+        & \leq \E\int_0^t{L^2|X_s-Y_s|^2ds}.
+    \end{align*}
+    Từ đó
+    \begin{align*}
+        \E|X_t-Y_t|^2 &\leq 2L^2(t+1)\E\int_0^t{|X_s-Y_s|^2ds}\\
+        & \leq 2L^2(T+1)\int_0^t{\E|X_s-Y_s|^2ds}.
+    \end{align*}
+    Nếu đặt $u(t) = \E|X_t-Y_t|^2$ thì
+    \[u(t) \leq 2L^2(T+1)\int_0^t{u(s)ds}~\forall t \in [0,T].\]
+    Từ đó áp dụng bổ đề Gronwall ta được
+    \[0 \leq u(t) \leq 0\cdot \exp\left(2L^2(T+1)(t-0)\right),\]
+    chứng tỏ $u(t) =\E|X_t-Y_t|^2 = 0$, tức $X_t \overset{hcc}{=} Y_t$ với mọi $t \in [0,T]$.
+    \item (Sự tồn tại nghiệm)
+    Xét dãy xấp xỉ Picard 
+    \begin{align*}
+        X_t^{(0)} &= x ~\forall t \in [0,T]\\
+        X_t^{(n+1)} &= x + \int_0^t{b(s,X_s^{(n)})ds} + \int_0^t{\sigma(s,X_s^{(n)})dB_s}.
+    \end{align*}
+    Ta có
+    \begin{align*}
+        X_t^{(n+1)} - X_t^{(n)} 
+        &= \int_0^t{[b(s,X_s^{(n)})-b(s,X_s^{(n-1)})]ds} \\
+        &+ \int_0^t{[\sigma(s,X_s^{(n)})-\sigma(s,X_s^{(n-1)})]dB_s}
+    \end{align*}
+    Lập luận tương tự như phần trước, ta có ước lượng sau
+    \begin{align*}
+        \E\left|X_t^{(n+1)}-X_t^{(n)}\right|^2 
+        &\leq \underbrace{2L^2(T+1)}_{M}\int_0^t{\E\left|X_s^{(n)}-X_s^{(n-1)}\right|^2ds}.
+    \end{align*}
+    Trong đó
+    \begin{align*}
+        X_t^{(1)}-X_t^{(0)}
+        &= \int_0^t{b(s,X_s^{(0)}ds} +\int_0^t{\sigma(s,X_s^{(0)})dB_s}\\
+        &= \int_0^t{b(s,x)ds} +\int_0^t{\sigma(s,x)dB_s}\\
+    \end{align*}
+    Nên 
+    \begin{align*}
+        \E\left|X_t^{(1)}-X_t^{(0)}\right|^2 
+        &\leq 2\left(\int_0^t{b(s,x)ds}\right)^2+2\left(\E\int_0^t{\sigma(s,x)dB_s}\right)^2\\
+        &\leq 2t\int_0^t|b(s,x)|^2ds+2\E\int_0^t{\sigma^2(s,x)ds}\\
+        &\leq 2T\int_0^t{L^2(1+|x|)^2ds} + 2\int_0^t{L^2(1+|x|)^2ds}\\
+        &\leq 2TL^2(1+|x|)^2t + 2L^2(1+|x|)^2t\\
+        &\leq \underbrace{2L^2(1+|x|)^2T(T+1)}_{C}.
+    \end{align*}
+    Tương tự thì 
+    \begin{align*}
+        \E\left|X_t^{(2)}-X_t^{(1)}\right|^2 
+        &\leq M\int_0^t{\E\left|X_s^{(1)}-X_s^{(0)}\right|^2ds}\\
+        &\leq M\int_0^t{Cds} = MCt.\\
+        \E\left|X_t^{(3)}-X_t^{(2)}\right|^2 
+        &\leq M\int_0^t{\E\left|X_s^{(2)}-X_s^{(1)}\right|^2ds}\\
+        &\leq M\int_0^t{MCsds} = M^2C\dfrac{t^2}{2}.\\
+        \E\left|X_t^{(4)}-X_t^{(3)}\right|^2 
+        &\leq M\int_0^t{\E\left|X_s^{(3)}-X_s^{(2)}\right|^2ds}\\
+        &\leq M\int_0^t{M^2C\dfrac{s^2}{2}ds} = M^3C\dfrac{t^3}{3!}.\\
+        &\cdots\\
+        \E\left|X_t^{(n+1)}-X_t^{(n)}\right|^2 
+        &\leq M^nC\dfrac{t^n}{n!} ~\forall t \in [0,T].
+    \end{align*}
+    Từ đó với mọi $m>n$, ta có
+    \begin{align*}
+        \left|X_t^{(m)}-X_t^{(n)}\right|^2
+        &\leq \left(\left|X_t^{(m)}-X_t^{(m-1)}\right| + \ldots + \left|X_t^{(n+1)}-X_t^{(n)}\right|\right)^2\\
+        &\leq \left(\left|X_t^{(m)}-X_t^{(m-1)}\right|^2  + \ldots + \left|X_t^{(n+1)}-X_t^{(n)}\right|^2\right) \cdot \underbrace{(1^2+\cdots+1^2)}_{m-n}.
+    \end{align*}
+    Vì vậy 
+    \begin{align*}
+        \E\left|X_t^{(m)}-X_t^{(n)}\right|^2
+        &\leq (m-n)\left(\E\left|X_t^{(m)}-X_t^{(m-1)}\right|^2  + \ldots + \E\left|X_t^{(n+1)}-X_t^{(n)}\right|^2\right) \\
+        &\leq (m-n) \left(M^{m-1}C\dfrac{t^{m-1}}{(m-1)!}+\ldots+M^nC\dfrac{t^n}{n!}\right)\\
+        &\leq (m-n)C \left(\dfrac{(MT)^{m-1}}{(m-1)!}+\ldots+\dfrac{(MT)^n}{n!}\right) \longrightarrow 0 \text{ khi } m,n \to \infty.
+    \end{align*}
+    Dẫn đến dãy Picard ở trên hội tụ, lấy giới hạn khi $n \to \infty$ cho biểu thức truy hồi dãy trên ta suy ra phương trình đã cho có nghiệm.
+    Tiếp theo ta ước lượng moment nghiệm bằng cách sử dụng định lý sau
+    \begin{thm}
+        Giả sử các hệ số $b$ và $\sigma$ là Lipschitz và tăng trưởng tuyến tính thì 
+        \[\E|X_t|^p < \infty ~\forall t \in [0,T], p \geq 2.\]
+    \end{thm}
+    Vì với mọi $a,b,c$ và $p>1$ thì \[(|a|+|b|+|c|)^p \leq 3^{p-1}(|a|^p+|b|^p+|c|^p).\]
+    Nên với \[X_t = x+\int_0^t{b(s,X_s)ds}+\int_0^t{\sigma(s,X_s)dB_s}\]
+    thì 
+    \begin{align*}
+        |X_t|^p &\leq \left(|x|+\left|\int_0^t{b(s,X_s)ds}\right|+\left|\int_0^t{\sigma(s,X_s)dB_s}\right|\right)^p\\
+        &\leq 3^{p-1}\left(|x|^p+\left|\int_0^t{b(s,X_s)ds}\right|^p+\left|\int_0^t{\sigma(s,X_s)dB_s}\right|^p\right)\\
+    \end{align*}
+    Do đó 
+    \begin{align*}
+        \E|X_t|^p
+        &\leq 3^{p-1}\left(\E|x|^p+\E\left|\int_0^t{b(s,X_s)ds}\right|^p+\E\left|\int_0^t{\sigma(s,X_s)dB_s}\right|^p\right)
+    \end{align*}
+    Mà theo bất đẳng thức Holder thì
+    \begin{align*}
+        \left|\int_0^t{b(s,X_s)ds}\right| &\leq \left(\int_0^t{\left|b(s,X_s)\right|^pds}\right)^{1/p} \left(\int_0^t{1^qds}\right)^{1/q}
+    \end{align*}
+    nên 
+    \begin{align*}
+        \left|\int_0^t{b(s,X_s)ds}\right|^p 
+        &\leq \left(\int_0^t{\left|b(s,X_s)\right|^pds}\right)t^{p-1}\\
+        &\leq \left(\int_0^t{\left|b(s,X_s)\right|^pds}\right)T^{p-1}\\
+        &\leq \left(\int_0^t{\left[L(1+|X_s|)\right]^pds}\right)T^{p-1}.
+    \end{align*}
+    Mặt khác theo bất đẳng thức $B-D-G$ và Holder thì
+    \begin{align*}
+        \E\left|\int_0^t{\sigma(s,X_s)dB_s}\right|^p
+        &\leq \E\left|\int_0^t{|\sigma(s,X_s)|^2ds}\right|^{p/2}\\
+        &\leq T^{P/2-1}\int_0^t{\E|\sigma(s,X_s)|^pds}
+    \end{align*}
+    Từ đó suy ra 
+    \begin{align*}
+        \E|X_t|^p 
+        &\leq 3^{p-1}\left(|x|^p + T^{p-1}L^p\int_0^t{\E(1+|X_s|)^pds}  + T^{p/2-1}L^p\int_0^t{\E(1+|X_s|)^pds}\right)\\
+        &\leq 3^{p-1}\left(|x|^p + (T^{p-1}+T^{p/2-1})L^p\int_0^t{\E(1+|X_s|)^pds}\right)\\
+        &\leq 3^{p-1}\left(|x|^p + (T^{p-1}+T^{p/2-1})L^p\int_0^t{\E[2^{p-1}(1+|X_s|^p)]ds}\right)\\
+        &\leq 3^{p-1}\left(|x|^p + (T^{p-1}+T^{p/2-1})L^p2^{p-1}\int_0^t{(1+\E|X_s|^p)ds}\right)\\
+        &\leq 3^{p-1}\left(|x|^p + (T^{p-1}+T^{p/2-1})L^p2^{p-1}\left[T+\int_0^t{\E|X_s|^pds}\right]\right)\\
+        &\leq \varepsilon + m \int_0^t{\E|X_s|^pds}\quad \text{với } \varepsilon, m \text{ nào đó}.
+    \end{align*}
+    Sử dụng bổ đề Gronwall ta được
+        \[\E|X_t|^p \leq \varepsilon e^{mt}~\forall t \in [0,T].\]
+    Vì vậy $\E|X_t|^p < \infty~\forall t \in [0,T].$
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
+

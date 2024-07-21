@@ -1,0 +1,383 @@
+\chapter{Vi phân I-tô}
+\section{Công thức vi phân Itô} 
+Nhắc lại về vi phân tất định, xét $x_t = x_o +\displaystyle \int_0^tf_sds$, $t\in[0;T]$. \\
+Khi đó $x'_t = f_t$ tức $ dx_t = f_tdt$. Đặt $y_t = g(t, x_t)$ với $g \in C^{1,2}([0,T]\times \R)$ thì 
+\[ dy_t= \bigg(\dfrac{\partial g}{\partial t}(t, x_t)+\dfrac{\partial g}{\partial x}(t, x_t).\dfrac{\partial x}{\partial t}\bigg)dt = \bigg(\dfrac{\partial g}{\partial t}(t, x_t)+\dfrac{\partial g}{\partial x}(t,x_t)\cdot f_t\bigg)dt.\]
+\begin{question*}
+    Công thức vi phân có mở rộng được cho tích phân Itô không?
+\end{question*}
+\begin{defn}
+    $(X_t)_{t\in[0;T]}$ gọi là một quá trình ngẫu nhiên Itô nếu \[X_t = x_0 +\displaystyle \int_0^tU_sds +\displaystyle \int_0^tV_sdB_s \quad (\ast)\] với $t\in[0;T]$. Trong đó $V \in L_a^2(\Omega\times[0;T])$ và $U$ là $\mathbb F$-tương thích và $\displaystyle \int_0^T|U_s|ds < \infty$.
+\end{defn}
+\begin{remark*}
+    Biểu thức $(\ast)$ được gọi là dạng tích phân của $X_t$. Ta cũng thường viết $X_t$ dưới dạng vi phân như sau 
+\begin{align*}
+    dX_t &= U_tdt + V_tdB_t, t\in [0,T]\\
+    X_0  &= x_0.
+\end{align*}
+\end{remark*}
+\begin{defn}(Công thức vi phân Itô)
+Xét hàm $f\in C^{1, 2}([0,T]\times\mathbb R)$ và định nghĩa $Y_t = f(t, X_t)$. Khi đó, ta có: \[dY_t= \dfrac{\partial f}{\partial t}(t, X_t)dt +\dfrac{\partial f}{\partial x}(t, X_t)dX_t + \dfrac{1}{2}.\dfrac{\partial^2 f}{\partial x^2}(t, X_t).(dX_t)^2.\]Trong đó, ta quy ước: $dt\cdot dt=dt\cdot dB_t=dB_t \cdot dt=0, dB_t\cdot dB_t=dt$. 
+\end{defn}
+\begin{remark*}
+\begin{itemize}
+    \item[i)] $(dX_t)^2 = dX_t.dX_t=(U_tdt + V_tdB_t)(U_tdt + V_tdB_t)=V_t^2dt.$
+    \item[ii)] Ta có thể viết $Y_t$ dưới dạng tích phân như sau: 
+    \begin{align*}
+        Y_t &=Y_0 + \displaystyle \int_0^t\dfrac{\partial f}{\partial t}(s,X_s)ds + \displaystyle \int_0^t\dfrac{\partial f}{\partial x}(s, X_s)dX_s + \dfrac{1}{2}.\displaystyle \int_0^t\dfrac{\partial^2 f}{\partial x^2}(s, X_s).V_s^2ds.\\
+        &=f(0; X_0) +\displaystyle \int_0^t\dfrac{\partial f}{\partial t}(s, X_s)ds + \displaystyle \int_0^t\dfrac{\partial f}{\partial x}(s, X_s)(U_sds + V_sdB_s)+\dfrac{1}{2}\displaystyle \int_0^t\dfrac{\partial^2 f}{\partial x^2}(s, X_s).V_s^2ds\\
+        &=f(0, X_0)+\displaystyle \int_0^t\bigg(\dfrac{\partial f}{\partial t}+\dfrac{\partial f}{\partial x}.U_s +\dfrac{1}{2}.\dfrac{\partial^2 f}{\partial x^2}.V_s^2\bigg).ds + \displaystyle \int_0^t\dfrac{\partial f}{\partial x}(s, X_s).V_sdB_s.
+    \end{align*}
+    \item[iii)] Chuyển động Brown $(B_t)_{t\in[0,T]}$ cũng là 1 quá trình Itô. \[ B_t = 0 + \displaystyle \int_0^t 0ds + \displaystyle \int_0^t dB_s.\]
+\end{itemize}
+\end{remark*}
+\begin{exam*}
+Xét $X_t = B_t$ và hàm $f(t, x) = t.x$. Tính vi phân Itô của $Y_t=f(t, X_t)$. 
+\begin{sol*}
+    Ta có: $dY_t = X_tdt + tdX_t + \dfrac{1}{2}\cdot 0\cdot(dX_t)^2 = B_tdt+tdB_t$. \\Từ công thức trên ta có: $Y_t = Y_0 +\displaystyle \int_0^t B_sds + \displaystyle \int_0^tsdB_s$. \\Hay: $tB_t = \displaystyle \int_0^tB_sds + \displaystyle \int_0^tsdB_s$. \\
+    Như vậy: $\displaystyle \int_0^t sdB_s = tB_t - \displaystyle \int_0^t B_sds$.
+\end{sol*} 
+\end{exam*}
+\begin{exam*}
+Tính vi phân Itô của $Y_t=B_t^2$. Từ đó, tính $\displaystyle \int_0^tB_sdB_s$.
+\begin{sol*}
+    Ta có: $f(t, x) = x^2, X_t = B_t$. \\Do đó: $dY_t=0dt + 2X_tdX_t + \dfrac{1}{2}.2(dX_t)^2 = 2.B_tdB_t + dt$.\\
+    Viết dưới dạng tích phân, ta có: $Y_t = Y_0 + \displaystyle \int_0^t2B_sdB_s + t$. Do đó: $\displaystyle \int_0^tB_sdB_s = \dfrac{B_t^2-t}{2}$.
+\end{sol*}
+\end{exam*}
+\begin{exam*}
+Tính $\displaystyle \int_0^tsB_sdB_s$.
+\begin{sol*}
+    Ta có $Y_t = f(t,B_t) = tB_t^2$ với $f(t, x)= tx^2 \in C^{1,2}([0,T]\times \R)$.\\ Áp dụng công thức vi phân Itô, ta có 
+    \[dY_t=B_t^2dt + 2tB_tdB_t + \dfrac{1}{2}.2t(dB_t)^2 = (B_t^2 +t)dt + 2tB_tdB_t.\] 
+    Do đó 
+    \[Y_t = Y_0 + \displaystyle \int_0^t(B_s^2 +s)ds + \displaystyle \int_0^t2sB_sdB_s.\]
+    Vì vậy
+    \[\displaystyle \int_0^tsB_sdB_s 
+    = \dfrac{1}{2}\bigg(Y_t - Y_0 - \displaystyle \int_0^t(B_s^2+s)ds\bigg) 
+    = \dfrac{1}{2}\bigg(t.B_t^2 - \displaystyle \int_0^t(B_s^2+s)ds\bigg).\]
+\end{sol*}
+\end{exam*}
+% ---------------------------------------------------------------------
+\begin{exam*}
+Tính các tích phân sau:
+\begin{itemize}
+    \item[i)] $\displaystyle \int_0^t s^2 B_s^3 dB_s $
+    \item[ii)] $\displaystyle \int_0^t \e^{s+B_s} dB_s $
+    \item[iii)] $\displaystyle \int_0^t \cos B_s dB_s $
+\end{itemize}
+\end{exam*}
+\begin{sol*}
+    \begin{itemize}
+        \item[i)] Xét hàm $f(t,x)=t^2x^4$ và $Y_t=t^2 B_t^4$. Áp dụng công thức vi phân Itô ta có:
+        \begin{align*}
+            dY_t 
+            &= 2t B_t^4 dt + 4t^2 B_t^3 dB_t + \dfrac{1}{2}\cdot 12t^2 B_t^2 (dB_t)^2 \\
+            &= \left(2t B_t^4 + 6t^2 B_t^2\right)dt + 4t^2 B_t^3 dB_t.
+        \end{align*}
+        Do đó viết dưới dạng tích phân ta có:
+        \[Y_t = Y_0 + \displaystyle \int_0^t \left(2s B_s^4 + 6s^2 B_s^2\right)ds + \displaystyle \int_0^t 4s^2 B_s^3 dB_s\]
+        Vì vây:
+        \begin{align*}
+            \displaystyle \int_0^t s^2 B_s^3 dB_s 
+            &= \dfrac{1}{4} \left(Y_t - Y_0 - \displaystyle \int_0^t (2s B_s^4 + 6s^2 B_s^2)ds \right)\\
+            &= \dfrac{1}{4} \left(t^2 B_t^4 - \displaystyle \int_0^t \left(2s B_s^4 + 6s^2 B_s^2\right)ds \right).
+        \end{align*}
+        \item[ii)] Xét hàm $f(t,x)=\e^{t+x}$ và $Y_t= \e^{t+B_t} $. Áp dụng công thức vi phân Itô ta có:
+        \begin{align*}
+            dY_t 
+            &= \e^{t+B_t} dt + \e^{t+B_t} dB_t + \dfrac{1}{2}\cdot \e^{t+B_t} (dB_t)^2 \\
+            &= \dfrac{3}{2}\e^{t+B_t} dt + \e^{t+B_t} dB_t.
+        \end{align*}
+        Do đó viết dưới dạng tích phân ta có:
+        \[Y_t = Y_0 + \displaystyle \int_0^t \dfrac{3}{2}\e^{s+B_s} ds + \displaystyle \int_0^t \e^{s+B_s} dB_s\]
+        Vì vây:
+        \begin{align*}
+            \displaystyle \int_0^t \e^{s+B_s} dB_s 
+            &= Y_t - Y_0 - \dfrac{3}{2}\displaystyle \int_0^t \e^{s+B_s} ds\\
+            &= \e^{t+B_t} - 1 - \dfrac{3}{2}\displaystyle \int_0^t \e^{s+B_s} ds.
+        \end{align*}
+        \item[iii)] Xét hàm $f(t,x)=\sin  x$ và $Y_t=\sin B_t$. Áp dụng công thức vi phân Itô ta có:
+        \begin{align*}
+            dY_t 
+            &= \cos B_t dB_t + \dfrac{1}{2}\cdot (-\sin B_t) (dB_t)^2 \\
+            &= \cos B_t dB_t - \dfrac{1}{2}\cdot \sin B_t dt.
+        \end{align*}
+        Do đó viết dưới dạng tích phân ta có:
+        \[Y_t = Y_0 + \displaystyle \int_0^t \cos B_s dB_s - \displaystyle \int_0^t \dfrac{1}{2}\cdot \sin B_s ds \]
+        Vì vây:
+        \begin{align*}
+            \displaystyle \int_0^t \cos B_s dB_s &= Y_t - Y_0 + \dfrac{1}{2} \displaystyle \int_0^t \sin B_sds \\
+            &= \sin B_t + \dfrac{1}{2} \displaystyle \int_0^t \sin B_sds.
+        \end{align*}
+    \end{itemize}
+\end{sol*}
+\begin{exam*}
+Cho $(B_t)_{t \in [0,T]}$ là chuyển động Brown. Ký hiệu $m_K(t) = \E B_t^K$ với $K = 0,1,2,\dots$
+\begin{itemize}
+    \item[i)] Chứng minh rằng: $m_K(t) = \dfrac{1}{2} K(K-1) \displaystyle \int_0^t m_{K-2}(s) ds$.
+    \item[ii)] Từ đó tính $\E B_t^6$. 
+\end{itemize}
+\end{exam*}
+\begin{sol*}
+    \begin{itemize}
+        \item[i)] Xét hàm $f(t,x)= x^K$ và $Y_t= B_t^K$. Áp dụng công thức vi phân Itô ta có:
+        \begin{align*}
+            dY_t 
+            &= 0dt + K B_t^{K-1} dB_t + \dfrac{1}{2}K(K-1) B_t^{K-2} (dB_t)^2 \\
+            &= \dfrac{1}{2}K(K-1) B_t^{K-2} dt + K B_t^{K-1} dB_t.
+        \end{align*}
+        Do đó viết dưới dạng tích phân ta có:
+        \[Y_t = Y_0 + \displaystyle \int_0^t K B_s^{K-1} dB_s + \displaystyle \int_0^t \dfrac{1}{2}K(K-1) B_s^{K-2} ds\]
+        Hay: \[ B_t^K = \displaystyle \int_0^t K B_s^{K-1} dB_s + \dfrac{1}{2}K(K-1) \displaystyle \int_0^t B_s^{K-2} ds\]
+       Lấy kì vọng hai vế ta được:               
+       \[\E\left(B_t^K\right)  = \E\left(\displaystyle \int_0^t K B_s^{K-1} dB_s + \dfrac{1}{2}K(K-1) \displaystyle \int_0^t B_s^{K-2} ds\right)  \]
+       Suy ra: 
+       \begin{align*}
+           m_K(t) 
+           &= \E\left(K\displaystyle \int_0^t B_s^{K-1} dB_s \right)+ \dfrac{1}{2}K(K-1)  \E\left(\displaystyle \int_0^t B_s^{K-2} ds\right)\\
+           &= 0 + \dfrac{1}{2}K(K-1) \displaystyle \int_0^t \E \left(B_s^{K-2}\right) ds
+       \end{align*}
+       Vậy $m_K(t) = \dfrac{1}{2}K(K-1) \displaystyle \int_0^t m_{K-2} (s) ds$.
+       \item[ii)] Ta có:
+       \begin{align*}
+           \E B_t^6 = m_6(t) 
+           &= \displaystyle \int_0^t \dfrac{1}{2} \cdot 6(6-1) m_4(s) ds \\
+           &= 15 \displaystyle \int_0^t m_4(s) ds.     
+       \end{align*}
+       Mà ta lại có: \[m_4(t) = \dfrac{1}{2} \cdot 4(4-1) \displaystyle \int_0^t m_2(s) ds = 6 \displaystyle \int_0^t s ds = 3t^2.\]
+       Vậy $m_6(t) = 15 \displaystyle \int_0^t 3s^2 ds = 15t^3$.       
+    \end{itemize}    
+\end{sol*}
+\begin{exam*}
+Xét $Y_t = \exp  \left(\displaystyle \int_0^t B_s dB_s - \dfrac{1}{2} \displaystyle \int_0^t B_s^2 ds \right)$ với $0 \leq t \leq T$. Tính $dY_t$.
+\end{exam*}
+\begin{sol*}
+    Xét $X_t = - \dfrac{1}{2} \displaystyle \int_0^t B_s^2 ds + \displaystyle \int_0^t B_s dB_s$. Khi đó: $Y_t = \e^{X_t}$ và $f(x,t) = e^x$. Áp dụng công thức vi phân Itô ta có:
+    \begin{align*}
+        dY_t &= e^{X_t} dX_t + \dfrac{1}{2} e^{X_t} (dX_t)^2 \\
+        &= e^{X_t} \left(-\dfrac{1}{2} B_t^2 dt + B_t dB_t\right) + \dfrac{1}{2} e^{X_t} B_t^2 dt = B_t e^{X_t} dB_t.
+    \end{align*}
+\end{sol*}
+% ---------------------------------------------------------------------
+\begin{exam*}
+\begin{itemize}
+    \item[i)] Cho $a>0$ và $\sigma \in \R$. Xét quá trình ngẫu nhiên $X_t = \sigma \e^{-at} \displaystyle \int_0^t \e^{as}dB_s, t \geq 0$. Chứng minh rằng $X_t$ thoả mãn: \[dX_t = -aX_tdt+ \sigma dB_t, t \geq 0.\]
+    \remarkname: $X_t$ được gọi là quá trình Ornstein - Uhlenbeck.
+    \item[ii)] Xét quá trình ngẫu nhiên $X_t = \sinh (c+t+B_t), t \geq 0$, trong đó $c \in \R$. Chứng minh rằng:
+    \[dX_t = \left(\sqrt{1+X_t^2} + \dfrac{1}{2}X_t \right)dt + \sqrt{1+X_t^2}dB_t, \quad t \geq 0.\]
+    \begin{remark*}
+    $\sinh x = \dfrac{e^x - e^{-x}}{2}, \cosh{x} = \dfrac{e^x + e^{-x}}{2} = \sqrt{\sinh^2{x} +1}$.
+    \end{remark*}
+\end{itemize}
+\end{exam*}
+\begin{sol*}
+    \begin{itemize}
+        \item[i)] Đặt $U_t = \displaystyle \int_0^t \e^{as} dB_s \rightarrow dU_t = \e^{at} dB_t$. Xét hàm $f(t,u)= \sigma \e^{-at}u$, khi đó $X_t = f(t,U_t)$. Áp dụng công thức vi phân Itô ta có:
+        \begin{align*}
+            dX_t &= -a \sigma \e^{-at}U_tdt+ \sigma \e^{-at} dU_t + \dfrac{1}{2} \cdot 0 \cdot (dU_t)^2\\
+            &= -a \sigma \e^{-at} \left(\displaystyle \int_0^t \e^{as}dB_s\right)dt+ \sigma \e^{-at} \e^{at} dB_t \\
+            &= -aX_tdt+ \sigma dB_t.
+        \end{align*}       
+        \item[ii)] Đặt $U_t = B_t$, xét hàm $f(t,u) = \sinh (c+t+u) \in C^{1,2}([0,T]\times \R)$. Khi đó: \[X_t = f(t,U_t) =\sinh (c+t+U_t) .\]  Áp dụng công thức vi phân Itô ta có:
+        \begin{align*}
+            dX_t &= \cosh (c+t+B_t)dt + \cosh (c+t+B_t)dB_t + \dfrac{1}{2} \sinh (c+t+B_t)(dB_t)^2 \\
+            &= \left(\cosh (c+t+B_t)+ \dfrac{1}{2} \sinh (c+t+B_t)\right) + \cosh (c+t+B_t)dB_t \\
+            &= \left(\sqrt{1+ \sinh ^2(c+t+B_t) } + \dfrac{1}{2} \sinh (c+t+B_t) \right) + \sqrt{1+ \sinh ^2(c+t+B_t) } dB_t \\
+            &= \left(\sqrt{1+X_t^2} + \dfrac{1}{2}X_t \right)dt + \sqrt{1+X_t^2}dB_t.
+        \end{align*}
+    \end{itemize}
+\end{sol*}
+\begin{exam*}
+    Chứng minh rằng quá trình ngẫu nhiên $(X_t)_{t \in [0,T]}$ thoả mãn phương trình tương ứng.
+\begin{itemize}
+    \item[i)] $X_t = \dfrac{B_t}{1+t}$ thoả mãn $dX_t = \dfrac{-1}{1+t}X_t+\dfrac{1}{1+t}dB_t$.
+    \item[ii)] $X_t = \sin B_t$ thoả mãn $dX_t = - \dfrac{1}{2}X_tdt + \sqrt{1-X_t^2}dB_t$ với mọi $t$ thoả mãn $t < t_0 = \inf\left\{s: B_s \notin \left[\dfrac{-\pi}{2} ; \dfrac{\pi}{2}\right]\right\}$.
+    \item[iii)] $X_t = a(1-t) + bt + (1-t)\displaystyle \int_0^t \dfrac{dB_s}{1-s}$, $0 \leq t <1$ thoả mãn $dX_t = \dfrac{b-X_t}{1-t}dt + dB_t$, $0 \leq t <1$, $a,b \in \R$.\\
+    \remarkname: $X_t$ được gọi là cầu Brown nối hai điểm $a$ và $b$.
+\end{itemize}
+\end{exam*}
+\begin{sol*}
+    \begin{itemize}
+        \item[i)] Đặt $U_t = B_t$. Xét hàm $f(t,u) = \dfrac{u}{1+t}$. Khi đó: $X_t = f(t,U_t) = \dfrac{U_t}{1+t}$. Áp dụng công thức vi phân Itô ta có:
+        \begin{align*}
+            dX_t &= \dfrac{-U_t}{(1+t)^2}dt + \dfrac{1}{1+t}dU_t + \dfrac{1}{2} \cdot 0 \cdot (dU_t)^2 \\
+            &= \dfrac{-U_t}{(1+t)^2}dt + \dfrac{1}{1+t}dB_t.
+        \end{align*} 
+        \item[ii)] Đặt $U_t = B_t$ với mọi $t < t_0 = \inf \left\{s: B_s \notin \left[\dfrac{-\pi}{2} ; \dfrac{\pi}{2} \right]  \right\}$. Xét hàm: $f(t,u) = \sin  U_t$. Khi đó $X_t = f(t,U_t)= \sin  U_t$ Áp dụng công thức vi phân Itô ta có:
+        \begin{align*}
+            dX_t &= 0dt + \cos U_t dU_t + \dfrac{1}{2}(-\sin U_t)(dU_t)^2\\
+            &= \cos B_t dB_t - \dfrac{1}{2}\sin B_t (dB_t)^2\\
+            &= \cos B_t dB_t - \dfrac{1}{2}\sin B_t dt\\
+            &= \sqrt{1-X_t^2} dB_t -\dfrac{1}{2}X_tdt.
+        \end{align*}
+        \item[iii)] Đặt $U_t = \displaystyle \int_0^t \dfrac{dB_s}{1-s}$. Khi đó $dU_t = \dfrac{1}{1-t}dB_t$. Xét hàm $f(t,u) = a(1-t)+bt+(1-t)u$. Vì vậy \[X_t = f(t,U_t)=a(1-t)+bt+(1-t)U_t.\] Áp dụng công thức vi phân Itô ta có:
+        \begin{align*}
+            dX_t &= (-a+b-U_t)dt +(1-t)dU_t+ \dfrac{1}{2} \cdot 0 \cdot (dU_t)^2\\
+            &= (-a+b-U_t)dt +(1-t)\dfrac{1}{1-t}dB_t\\
+            &= dB_t - \dfrac{(a-b+U_t)(1-t)}{1-t} dt\\
+            &=  dB_t - \dfrac{a(1-t)-b(1-t)+U_t(1-t)}{1-t} dt\\
+            &= dB_t - \dfrac{a(1-t)+bt+U_t(1-t)-B}{1-t} dt\\
+            &= dB_t - \dfrac{X_t-b}{1-t}dt = \dfrac{b-X_t}{1-t}dt + dB_t.     
+        \end{align*}
+    \end{itemize}
+\end{sol*}
+\begin{exam*}
+    Giả sử quá trình ngẫu nhiên $(X_t)_{t \in [0,T]}$ thoả mãn $dX_t = aX_tdt + \sigma X_t dB_t, t \in [0,T]$ trong đó $X_0>0,a, \sigma \in \R$. Tìm $X_t$.
+\end{exam*}
+\begin{sol*}
+    Đặt $Y_t =\ln X_t$. Áp dụng công thức vi phân Itô ta có:
+    \begin{align*}
+        dY_t &= \dfrac{dX_t}{X_t} - \dfrac{1}{2X_t^2}(dX_t)^2\\
+        &= \dfrac{aX_tdt+\sigma X_tdB_t}{X_t} - \dfrac{1}{2X_t^2}(\sigma X_t)^2 dt \\
+        &= \left(a -\dfrac{\sigma^2}{2}\right)dt + \sigma dB_t.
+    \end{align*}
+    Dưới dạng tích phân ta có:
+    \[Y_t = Y_0 + \displaystyle \int_0^t \left(a -\dfrac{\sigma^2}{2}\right)ds + \displaystyle \int_0^t \sigma dB_s.\]
+    hay \[\ln X_t = \ln X_0 + \left(a -\dfrac{\sigma^2}{2}\right)t + \sigma B_t.\]
+    Do đó: \[X_t = X_0 + \e^{\left(a -\dfrac{\sigma^2}{2}\right)t + \sigma B_t}.\]
+\end{sol*}
+\begin{thm}
+    Xét 2 quá trình Itô: 
+    \begin{align*}
+        X(t) = X_0 + \int\limits_0^tU_sds +\int\limits_0^tV_sdB_s, \quad t \in [0, T]\\
+        Y(t) = Y_0 + \int\limits_0^t\overline{U}_sds + \int\limits_0^t\overline{V}_sdB_s, \quad t \in [0, T]
+    \end{align*}
+    Cho $f \in \C^{1, 2, 2}([0, T]\times \R^2)$ và $Z(t) = f(t, X_t, Y_t)$. Khi đó, ta có: 
+    \begin{align*}
+        dZ_t &= \dfrac{\partial f}{\partial t}(t, X_t, Y_t)dt + \dfrac{\partial f}{\partial x}(t, X_t, Y_t)dX_t + \dfrac{\partial f}{\partial y}(t, X_t, Y_t)dY_t\\
+        &+ \dfrac{1}{2}\bigg(\dfrac{\partial ^2f}{\partial x^2}(t, X_t, Y_t)(dX_t)^2 + \dfrac{\partial ^2f}{\partial x \partial y}(t, X_t, Y_t)dX_tdY_t \\
+        &+ \dfrac{\partial ^2f}{\partial y \partial x}(t, X_t, Y_t)dX_tdY_t + \dfrac{\partial^2f}{\partial y^2}(t, X_t, Y_t)(dY_t)^2\bigg)
+    \end{align*}
+\end{thm}
+\examplename:  Cho
+\[Z_t = t^2 \cdot B_t \cdot \exp\left(-\frac{1}{2}\int\limits_0^t B_s^4ds + \int\limits_0^t B_s^2dB_s\right), \quad t\in [0, T].\] 
+Tính $dZ_t$.
+\begin{sol*}
+    Đặt: \[X_t = -\dfrac{1}{2} \int\limits_0^tB_s^4 + \int\limits_0^t  B_s^2dB_s, Y_t = B_t.\]
+    Xét hàm: \[f(t, x, y) = t^2ye^x\] Ta có: \[Z_t = f(t, X_t, Y_t).\]
+    Áp dụng công thức vi phân Itô, ta có: 
+    \begin{align*}
+        dZ_t 
+        &=  2tY_te^{X_t}dt + t^2Y_te^{X_t}dX_t
+        + t^2e^{X_t}dY_t + \dfrac{1}{2}\Big(t^2Y_te^{X_t}(dX_t)^2 + 2t^2e^{X_t}dX_tdY_t + 0(dY_t)^2\Big).\\
+        &= 2tY_te^{X_t}dt + t^2Y_te^{X_t}\Big(-\dfrac{1}{2}B_t^4dt + B_t^2dB_t\Big) + t^2e^{X_t}dB_t + \dfrac{1}{2}\Big(t^2Y_te^{X_t}B_t^4dt + 2t^2e^{X_t}B_t^2dt\Big).
+    \end{align*}
+    Do đó: $dZ_t = \Big(2tY_te^{X_t} + t^2e^{X_t}B_t^2\Big)dt + \Big(t^2Y_te^{X_t}B_t^2 + t^2e^{X_t}\Big)dB_t.$
+\end{sol*}
+\section{Tính chất martingale của tích phân Itô}
+\begin{defn}
+    Cho một họ các $\sigma$ - đại số $\G = (\G_t)_{t \in [0, T]}.$ Khi đó, quá trình ngẫu nhiên $(X_t)_{t \in [0, T]}$ được gọi là $\G$ - martingale nếu: 
+    \begin{itemize}
+        \item[a)] $\E|X_t| < \infty \quad \forall t \in [0, T].$
+        \item[b)] $\E[X_t|\G_s] = X_s \quad \forall s \leq t.$
+    \end{itemize}
+    Đặc biệt, nếu: $\G = \F$ thì ta chỉ nói $(X_t)_{t\in[0, T]}$ là một martingale.
+\end{defn}
+\comment: $\E[X_t] = \E[X_s] = \E[X_0] \quad \forall t, s.$\\
+
+Nhắc lại kỳ vọng có điều kiện: 
+\[\E[X|\F] = \begin{cases}
+    X& \text{ nếu } X  \text{ là } \F -\text{ đo được}\\
+    \E X& \text{ nếu } X\text{ và } \F ~\text{ độc lập}
+\end{cases}\]
+\examplename: Xét xem $X_t = B_t, t \in [0, T]$ có phải là martingale không?
+\begin{sol*}
+    Hiển nhiên ta có: $\E|B_t| < \infty \quad \forall t \in [0, T].$ Hơn nữa ta có: Khi $s\leq t,$
+   \begin{align*}
+       \E[B_t|\F_s] 
+        &= \E[B_t - B_s + B_s|\F_s]\\
+        &= \E[B_t - B_s|\F_s] + \E[B_s|\F_s]\\
+        &= \E[B_t - B_s] + B_s\\
+        &= B_s.
+   \end{align*}
+Vậy: $(B_t)_{t \in [0, T]}$ là một martingale.
+\end{sol*}
+\examplename: Xét xem các \qtnn sau có là martingale không?
+\begin{itemize}
+    \item[a)] $X_t = B_t^2 - t, t \in [0,T].$
+    \item[b)] $X_t = \e^{B_t - \frac{t}{2}}, t \in [0,T]$, ($X_t$ được gọi là chuyển động Brown hình học).
+\end{itemize}
+\begin{sol*}
+    \item[a)] Hiển nhiên: $\E|X_t| = \E\left|B_t^2-t\right| \leq \E\left|B_t^2\right| + t = 2t < \infty, \forall t \in [0,T]$. Khi $s \leq t$ ta có:
+    \begin{align*}
+        \E\left[X_t|\F_s\right]&=\E\left[B_t^2|\F_s\right]-t\\
+        &= \E\left[(B_t-B_s+B_s)^2|\F_s\right]-t\\
+        &= \E\left[(B_t-B_s)^2|\F_s\right]-2\E\left[(B_t-B_s)B_s|\F_s\right] + \E\left[B_s^2|\F_s\right] -t\\
+        &= \E(B_t-B_s)^2+2B_s\E\left[B_t-B_s|\F_s\right] +B_s^2-t\\
+        &= t - s +0+B_s^2-t = B_s^2-s=X_s
+    \end{align*}
+    Vậy: $(X_t)_{t \in [0, T]}$ là một martingale.
+    \item[b)] Ta có:
+    \begin{align*}
+        \E|X_t| &= \E \left[\e^{B_t - \frac{t}{2}} \right] = \e^{-\frac{t}{2}}\E \left[\e^{B_t}\right] \\
+        &= \e^{-\frac{t}{2}} \e^{\frac{t}{2}} = 1 < \infty, \forall t.
+    \end{align*}
+    Hơn nữa, ta có:
+    \begin{align*}
+        \E\left[X_t|\F_s\right] &= \E\left[\e^{B_t-\frac{t}{2}} |\F_s\right]\\
+        &= \e^{-\frac{t}{2}} \E\left[\e^{B_t-B_s}\e^{B_s} |\F_s\right]\\
+        &= \e^{-\frac{t}{2}}\e^{B_s}  \E\left[\e^{B_t-B_s} |\F_s\right]\\
+        &=  \e^{-\frac{t}{2}}\e^{B_s} \E\left[\e^{B_t-B_s}\right] =  \e^{-\frac{t}{2}}\e^{B_s} \e^{\frac{1}{2}(t-s)}\\
+        &= \e^{B_s - \frac{s}{2}} = X_s.
+    \end{align*}
+    Vậy: $(X_t)_{t \in [0, T]}$ là một martingale.
+\end{sol*}
+\begin{thm}
+    Cho \qtnn $u \in L_a^2 (\Omega \times [o,T])$. Khi đó, tích phân Itô $\int\limits_0^t u_s dB_s, t \in [0,T]$ là một martingale. Tức là ta có:
+    \[ \E \left[\int\limits_0^t u_s dB_s \Bigg| \F_{t_0} \right] = \int\limits_0^t u_s dB_s, \forall t_0 \leq t. \]
+\end{thm}
+\begin{thm}
+    Cho $F$ là một \bnn bình phương khả tích (tức là $\E|F|^s<\infty$). Khi đó tồn tại một \qtnn $u \in L_a^2 (\Omega \times [o,T])$ thoả mãn:
+    \[F = \E[F] + \int\limits_0^T u_s dB_s.\]
+\end{thm}
+\remarkname: 
+\begin{itemize}
+    \item[1.] Có thể tính $u$ nếu sử dụng đạo hàm Malliavin.
+    \item[2.] Định lý trên được gọi là Định lý biểu diễn martingale. 
+\end{itemize}
+\examplename: Tìm biểu diễn tích phân Itô cho các \bnn sau:
+\begin{itemize}
+    \item[a)] $F =B_T^2$
+    \item[b)] $F  = B_T^3$
+    \item[c)] $F = B_T^4$ 
+\end{itemize}
+\begin{sol*}
+    \begin{itemize}
+        \item[a)] Áp dụng công thức vi phân Itô, ta có:
+        \begin{align*}
+            dB_t^2 &= 2B_t dB_t + (dB_t)^2 \\
+            &= dt + 2B_t dB_t.
+        \end{align*}
+        Vậy khi đó: 
+        \[B_t^2 = B+0^2 + \int\limits_0^t ds+ \int\limits_0^t 2B_s dB_s\]
+        Chọn $t=T$ thì: \[F = T + \int\limits_0^T 2B_s dB_s.\]
+        Chú ý rằng $\E[F] = t$ nên: \[F = \E[F]+ \int\limits_0^t 2B_s dB_s.\]
+        \item[b)]  Áp dụng công thức vi phân Itô, ta có:
+        \[dB_t^3 = 3B_t^2 dB_t +3B_t dt\]
+        Chọn $t=T$ ta có:
+        \[F = \int\limits_o^T 3B_s ds + \int\limits_0^T 3B_s^2 dB_S\]
+        Áp dụng công thức tích phân từng phần ta có:
+        \begin{align*}
+            \int\limits_0^T 3B_s ds &= 3B_s s \Big|_0^T - \int\limits_0^T 3s dB_s\\
+            &= 3B_t T - \int\limits_0^T 3s dB_s \\
+            &= 3T - \int\limits_0^T dB_s -\int\limits_0^T 3s dB_s\\
+            &= \int\limits_0^T (3T-3s) dB_s
+        \end{align*}
+        Vậy $F = \displaystyle\int_0^T (3T-3s+3B_s^2) dB_s$.
+        \item[c)] Áp dụng công thức vi phân Itô, ta có:
+        \[dB_t^4 = 4B_t^3 dB_t +6B_t^2 dt\]
+        Chọn $t=T$ ta có
+        \begin{align*}
+            F &= \int\limits_0^T 6B_s^2 ds+ \int\limits_0^T 4B_s^3 dB_S\\
+            &= 6TB_T^2 - \int\limits_0^T 6s dB_s^2 + \int\limits_0^T 4B_s^3 dB_S\\
+            &= 6TB_T^2 - \int\limits_0^T 6s(2B_sdB_s+ds) + \int\limits_0^T 4B_s^3 dB_S            
+        \end{align*}
+       Sử dụng câu a) ta có: $B_T^2 = T + \int\limits_0^T 2B_s dB_s$. Do đó:
+       \begin{align*}
+           F &= 6T\left(T + \int\limits_0^T 2B_s dB_s\right) - \int\limits_0^T 12sB_s dB_s - 3T^2 + \int\limits_0^T 4B_s^3 dB_S \\
+           &= 3T^2 + \int\limits_0^T (12TB_s -12sB_s+4B_s^3) dB_s.
+       \end{align*}
+      
+    \end{itemize} 
+\end{sol*}

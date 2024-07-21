@@ -1,0 +1,106 @@
+\chapter{Chuyển động Brown}
+% ---------------------------------------------------------------------
+\section{Quá trình ngẫu nhiên}
+\begin{defn}[Quá trình ngẫu nhiên]
+    Hàm $X: [0, T] \times \Omega \longrightarrow \R$ cho bởi $ (t, \omega) \longmapsto X(t, \omega)$ được gọi là một quá trình ngẫu nhiên nếu nó là $\mathcal{B} \times \mathcal{F}-$ đo được (trong đó $\mathcal{B}$ là $\sigma-$ đại số Borel của đoạn $[0, T]$).
+\end{defn}
+\begin{remark*}
+Nếu $t$ cố định thì $X(t,\omega)$ là một \bnn, còn nếu $\omega$ cố định thì $X(t, \omega)$ là một hàm thông thường theo biến $t$ và đồ thị của hàm số $t\longmapsto X(t, \omega)$ được gọi là \textit{quỹ đạo của quá trình ngẫu nhiên} $X(t, \omega)$. Ta thường viết $X_t$ thay cho $X(t, \omega)$.
+\end{remark*}
+\begin{defn}[Hàm Covariant của quá trình ngẫu nhiên]
+    Hàm Covariant của một quá trình ngẫu nhiên $(X_t)_{t \in [0, T]}$ được định nghĩa bởi  $\mathbf{R}(t,s) = \E[(X_t - \E[X_t])(X_s - \E[X_s])]$, với $s,t \in [0, T]$.
+\end{defn}
+Ta có $\mathbf{R}(t,s) = \E[(X_t - \E[X_t])(X_s - \E[X_s])] = \E[X_tX_s]-\E[X_t]\E[X_s]$.\\
+Nói riêng khi $s=t$ thì $\mathbf{R}(t,t) = \E[(X_t - \E[X_t])^2] = \mathbb{D}[X_t].$
+
+\begin{defn}[Quá trình ngẫu nhiên liên tục]
+    Quá trình ngẫu nhiên $(X_t)_{t \in [0, T]}$ được gọi là liên tục nếu quỹ đạo của nó là liên tục, tức $\pp\big(\omega: \lim\limits_{t \rightarrow t_0} X_t = X_{t_0}\big)= 1$.
+\end{defn}
+% ---------------------------------------------------------------------
+\section{Định lý tiêu chuẩn liên tục Kolmogorov}
+\begin{thm}[Tiêu chuẩn liên tục Kolmogorov]
+    Cho $(X_t)_{t \in [0, T]}$ là một quá trình ngẫu nhiên. \\
+    Nếu $\E|X_t-X_s|^{\alpha} \leq c|t-s|^{\beta}~\forall t,s \in[0, T]$ và $\alpha, \beta, c > 0$ nào đó thì quỹ đạo của $(X_t)_t$ là liên tục.
+\end{thm}
+\begin{exam*}
+Cho $N$ là \bnn chuẩn tắc và $X_t = \sin(t) + Nt$ với $t\in [0, T]$ là một quá trình ngẫu nhiên.
+\begin{itemize}
+    \item[i.] Tính $\mathbf{R}(t,s).$
+    \item[ii.] $(X_t)_t$ có là quá trình ngẫu nhiên liên tục không?
+\end{itemize}
+\end{exam*}
+\begin{sol*}
+Lưu ý rằng $\E[N] = 0,~\E[N^2] = \mathbb{D}[N]+(\E[N])^2=1+0^2=1.$
+\begin{itemize}
+    \item[i.] Ta có $X_t = \sin(t) + Nt$ nên $\E[X_t]=\E[\sin(t)]+t\E[N]=\sin(t)~\forall t \in [0, T]$.\\
+    Do đó $\mathbf{R}(t,s) = \E[(X_t - \E[X_t])(X_s - \E[X_s])] = \E[(tN)(sN)]=ts\E[N^2]=ts.$
+    \item[ii.] Ta có 
+    \begin{align*}
+        \E|X_t-X_s|^2 &= \E|(\sin(t)-\sin(s))+(t-s)N|^2\\
+        &=\E[((\sin(t)-\sin(s))^2+2(\sin(t)-\sin(s))(t-s)N+(t-s)^2N^2]\\
+        &=((\sin(t)-\sin(s))^2+2(\sin(t)-\sin(s))(t-s)\E[N]+(t-s)^2\E[N^2]\\
+        &= |\sin(t)-\sin(s)|^2+|t-s|^2 \leq 2|t-s|^2.
+    \end{align*}
+    Áp dụng tiêu chuẩn liên tục Kolmogorov trong trường hợp này với $\alpha = 2, \beta = 1, c = 2$ thì $(X_t)_t$ là một quá trình ngẫu nhiên liên tục.
+\end{itemize}
+\end{sol*}
+% ---------------------------------------------------------------------
+\section{Chuyển động Brown}
+\begin{defn}[Chuyển động Brown]
+    Quá trình ngẫu nhiên $(B_t)_{t\in [0,T]}$ được gọi là một chuyển động Brown nếu 
+    \begin{itemize}
+        \item[i.] $B_0 = 0.$
+        \item[ii.] $B$ có số gia dừng, tức $B_t-B_s$ có phân phối chuẩn $N(0, t-s)$ với mọi $t>s$.
+        \item[iii.] $B_{t_2}-B_{t_1}, B_{t_3}-B_{t_2}, \ldots, B_{t_n}-B_{t_{n-1}}$  là các \bnn độc lập với mọi $t_1<t_2<\ldots<t_n$.
+        \item[iv.]Các quĩ đạo của $B$ là liên tục.
+    \end{itemize}
+\end{defn}
+% ---------------------------------------------------------------------
+\subsection{Các tính chất của chuyển động Brown}
+\begin{itemize}
+    \item[i.] \[\E[B_t] = 0, ~\mathbb{D}[B_t] = t.\]
+    Thật vậy $B_t=(B_t-B_0) \sim N(0, t-0) = N(0,t)$.
+    \item[ii.] \[\Cov(B_t, B_s) = \min\{t,s\}.\]
+    Thật vậy, giả sử $t>s$ thì 
+    \begin{align*}
+        \Cov(B_t, B_s) &= \E[(B_t-\E[B_t])(B_s-\E[B_s])]\\
+        &= \E[B_tB_s]=\E[(B_t-B_s)(B_s-B_0)]+\E[B_s^2]\\
+        &= \E[(B_t-B_s)]\cdot\E[(B_s-B_0]+\D[B_s]+(\E[B_s])^2\\
+        &= 0+s+0^2=s.
+    \end{align*}
+    Lập luận tương tự cho trường hợp $t<s$ thì $\Cov(B_t,B_s) = t$. Tóm lại $\Cov(B_t, B_s) = \min\{t,s\}.$\\
+    \remarkname: Ở chứng minh trên với $t>s$ (tương tự cho $t<s$) thì $(B_t-B_s)$ và $(B_s-B_0)$ là độc lập nên ta có phân tích như trên.
+    \item[iii.] \[\E[(B_s-B_t)^2]=|t-s|~\forall t,s\in [0,T].\]
+    Thật vậy, $\E[(B_t-B_s)^2]=\D[|B_t-B_s|] + (\E[|t-s|])^2=|t-s|$(vì $t>s$ thì $(B_t-B_s) \sim N(0,t-s)).$ 
+    \item[iv.] Hàm $t\longmapsto B_t$ là liên tục Holder bậc $\dfrac{1}{2}-\varepsilon$ với mọi $\varepsilon>0$, tức là $|B_t-B_s|\leq c|t-s|^{\frac{1}{2}-\varepsilon},~\forall t,s$ và $c=c(\omega) <\infty$.
+\end{itemize}
+\begin{ex}
+    Lần lượt tính $\E[(B_t-B_s)^3],~\E[(B_t-B_s)^4],~\E[\e^{aB_t}], ~\E[\e^{B_t+B_s}]$.
+\end{ex}
+% ---------------------------------------------------------------------
+\subsection{Biến phân bậc $p$}
+\begin{defn}[Biến phân bậc $p$]
+    Trên phân hoạch $\mathcal{P}: 0=t_0<t_1<\ldots<t_n=T$ của đoạn $[0,T]$ mà $d(\mathcal{P})\coloneqq \max\limits_{k}\{(t_k-t_{k-1})\}\xrightarrow[]{n\to \infty} 0$, ta xét $V_n(B,p) = \sum\limits_{k=1}^{n}|B_{t_k}-B_{t_{k-1}}|^p$ và gọi giới hạn theo xác suất của $V_n(B,p)$ là biến phân bậc $p$ của chuyển động Brown $B$.
+\end{defn}
+\begin{prop}
+    Với $p=2$ thì $V_n(B,2) = \sum\limits_{k=1}^{n}|B_{t_k}-B_{t_{k-1}}|^2$ hội tụ đến $T$ theo xác suất.
+\end{prop}
+\begin{proof}
+Ta sẽ chỉ ra $V_n(B,2)\xrightarrow[]{\pp} T$ bằng việc chứng minh \[\E|V_n(B,2)-T|^2=\sum\limits_{k=1}^{n}[(B_{t_k}-B_{t_{k-1}})^2-(t_k-t_{k-1})]\xrightarrow[]{n\to \infty} 0.\]
+Thật vậy, đặt $X_k = (B_{t_k}-B_{t_{k-1}})^2-(t_k-t_{k-1})$ thì \[\E[X_k]=\E[(B_{t_k}-B_{t_{k-1}})^2]-\E[(t_k-t_{k-1})]=(t_k-t_{k-1})-(t_k-t_{k-1})=0.\]
+Khi đó 
+\begin{align*}
+    \E|V_n(B,2)-T|^2 &= \E\left[\left(\sum\limits_{k=1}^{n}{X_k}\right)^2\right]=\E\left[\sum\limits_{k=1}^{n}{X_k^2} + 2\sum\limits_{1\leq i<j\leq n}{X_iX_j}\right]\\
+    % &= \E\left[\sum\limits_{k=1}^{n}{X_k^2} + 2\sum\limits_{1\leq i<j\leq n}{X_iX_j}\right]\\
+    &= \sum\limits_{k=1}^{n}\E[{X_k^2}]+ 2\sum\limits_{1\leq i<j\leq n}\E[{X_iX_j}].
+\end{align*}
+Với mọi $1\leq i<j\leq n$ thì $X_i, X_j$ là độc lập, do đó $\E[{X_iX_j}] = \E[X_i]\cdot\E[X_j] = 0\cdot 0 = 0$. Còn
+\begin{align*}
+    \E[X_k^2]&=\E[(B_{t_k}-B_{t_{k-1}})^2-(t_k-t_{k-1})]^2\\
+    &= \E[(B_{t_k}-B_{t_{k-1}})^4]-2(t_k-t_{k-1})\E[(B_{t_k}-B_{t_{k-1}})^2]+(t_k-t_{k-1})^2\\
+    &= 3(t_k-t_{k-1})^2-2(t_k-t_{k-1})^2+(t_k-t_{k-1})^2\\
+    &= 2(t_k-t_{k-1})^2.
+\end{align*}
+Vì vậy $\E|V_n(B,2)-T|^2 = 2\sum\limits_{k=1}^{n}(t_k-t_{k-1})^2\leq 2d(\mathcal{P})\sum\limits_{k=1}^{n}(t_k-t_{k-1})=2d(\mathcal{P})T\xrightarrow[]{n\to \infty} 0.$
+\end{proof}
+% ---------------------------------------------------------------------

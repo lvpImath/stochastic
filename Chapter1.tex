@@ -1,0 +1,150 @@
+\chapter{Nhắc lại về xác suất}
+\section{Không gian xác suất}
+% ---------------------------------------------------------------------
+\begin{defn}[$\sigma-$đại số]
+Cho tập $\Omega$  bất kỳ và xét  $\mathcal{F}$ là một họ các tập con của $\Omega$. Khi đó ta nói $\mathcal{F}$ là một $\sigma$ - đại số nếu nó thoả mãn
+\begin{itemize}
+\item[i)]$\emptyset \in \mathcal{F}.$
+\item[ii)] Nếu $A \in \mathcal{F}$ thì $A^c \in \mathcal{F}.$
+\item[iii)] $\forall k \geq 1,$ nếu $A_k \in \mathcal{F}$ thì $\bigcup\limits_{k = 1}^{\infty} A_k \in \mathcal{F}.$ 
+\end{itemize}
+\end{defn}
+\begin{exam*}
+Cho $\Omega = [0, 1]$ thì $\F_1=\{\emptyset, \Omega\}$ là một $\sigma$ - đại số, còn $\F_2 = \{[0, \frac{1}{2}]; [\frac{1}{3}, 1)\}$ thì không.
+\end{exam*}
+\begin{defn}[Độ đo xác suất] Hàm số $\pp: \F \to [0,1],~A \mapsto \pp(A)$ được gọi là một độ đo xác suất nếu nó thỏa mãn:
+\begin{itemize}
+\item[i)]$\pp(\emptyset) = 0$; $\pp(\Omega) = 1$
+\item[ii)] Nếu $A_k \in \mathcal{F}$ và $A_k \cap A_j = \emptyset~\forall k \neq j$ thì $\pp(\bigcup\limits_{k = 1}^{\infty} A_k) = \sum\limits_{k = 1}^{\infty}\pp(A_k).$
+\end{itemize}
+\end{defn}
+\begin{defn}[Không gian xác suất] Bộ ba $(\Omega, \mathcal{F}, \pp)$ được gọi là một không gian xác suất
+\end{defn}
+\begin{exam*}
+Cho $\Omega = [0,1]$ và $\mathcal{F} = \{A~|~A \subseteq [0, 1]\}$.(Các tập con của $\mathcal{F}$ có dạng $A = [a, b]$ hoặc $(a, b]$ hoặc $[a, b)$ hoặc $(a, b)$) và $\pp(A) = b - a$. Khi đó $(\Omega, \mathcal{F}, \pp)$ là một không gian xác suất.
+\end{exam*}
+\section{Biến ngẫu nhiên}
+\begin{defn}[Biến ngẫu nhiên] Hàm số $X: \Omega \to \R,~\omega \mapsto X(\omega)$ được gọi là biến ngẫu nhiên nếu $X$ là $\F$ - đo được.
+\end{defn}
+\begin{exam*}
+Cho $X: [0,1] \to \R,~\omega \mapsto 4\omega^2$. Khi đó với $ B = (2; 4) \in \mathbb R$ thì 
+\[X^{-1}(B) = \{ \omega : X(\omega) \in B \}\]
+\end{exam*}
+\begin{sol*}
+    Ta có: $2<X(\omega)<4 \Leftrightarrow 2<4\omega^2<4 \Leftrightarrow \dfrac{1}{2}<\omega^2<1 \Leftrightarrow \dfrac{1}{\sqrt{2}}<\omega<1 \Rightarrow X^{-1}(B) = \Big(\dfrac{1}{\sqrt{2}}; 1\Big) \in \F$. Chứng tỏ $X$ là một biến ngẫu nhiên.
+\end{sol*}
+\begin{defn}[Kỳ vọng] Kỳ vọng của biến ngẫu nhiên $X$ ký hiệu là $\E X$ và tính bởi công thức
+    \[\E X = \displaystyle \displaystyle \int \limits_{\Omega} X(\omega)d\mathbb{P}.\]
+\end{defn}
+\begin{remark*}
+$\E(X + Y) = \E X + \E Y$ và $\E(XY) = \E X\cdot\E Y$ nếu $X, Y$ là độc lập.
+\end{remark*}
+% ---------------------------------------------------------------------
+\begin{defn}[Không gian $L^p,~p>0$] Cho biến ngẫu nhiên $X$, $p>0$. Ta nói, $X\in L^p$ nếu $\E|X|^p < \infty$.
+\end{defn}
+\begin{remark*}
+    Nếu $X \in L^2$ thì ta nói $X$ là bình phương khả tích.    
+\end{remark*}
+% ---------------------------------------------------------------------
+\section{Một số bất đẳng thức cơ bản}
+\begin{enumerate}
+    \item (Bất đẳng thức \textit{Holder})
+        \[\E|XY| \leqslant (\E|X|^p)^\frac{1}{p} \cdot (\E|Y|^q)^\frac{1}{q}~\forall p,q>0: \dfrac{1}{p}+\dfrac{1}{q}=1\]
+    \item (Bất đẳng thức \textit{Minkowski})
+        \[\|X+Y\|_p \leqslant \|X\|_p + \|Y\|_p.\]
+    \item (Bất đẳng thức \textit{Jensen}) Nếu $g(X)$ là hàm lồi thì \[\E(g(X)) \geqslant g(\E(X)).\]
+    \item (Bất đẳng thức \textit{Chebyshev}) Cho $X$ là biến ngẫu nhiên không âm thì: \[\mathbb{P}(X>a) \leq \dfrac{\E X}{a} ~\forall a>0.\]
+\end{enumerate}
+\begin{remark*}
+    Nếu $X$ là biến ngẫu nhiên bất kỳ ta cần biến đổi $X$ để nhận được biến ngẫu nhiên không âm mới. 
+\end{remark*}
+\section{Sự hội tụ của dãy các biến ngẫu nhiên}
+Xét dãy $\{X_n\}_{n \geq 1}$ của các biến ngẫu nhiên
+\subsection{Hội tụ hầu chắc chắn (h.c.c)}
+Dãy $\{X_n\}$ được gọi là hội tụ hầu chắc chắn tới $X$ nếu: 
+$$ \pp \left( \omega: \lim\limits_{n \to \infty} X_n = X \right) = 1$$
+\subsection{Hội tụ theo xác suất}
+Dãy $\{X_n\}$ được gọi là hội tụ theo xác suất tới $X$ nếu:
+$$\lim\limits_{n \to \infty} \pp \left( \omega: \left| X_n - X \right| > \varepsilon \right) = 0 \quad \forall \varepsilon > 0$$
+\begin{remark*}
+    Ta chỉ cần quan tâm đến $\varepsilon$ đủ nhỏ.    
+\end{remark*}
+\subsection{Sự hội tụ theo phân phối}
+Dãy $\{X_n\}$ được gọi là hội tụ theo phân phối tới $X$ nếu:
+$$\pp \left( X_n \leq x \right) \xrightarrow[]{n \to \infty} \pp \left( X \leq x \right)$$ tại mọi $x$ mà vế phải là hàm liên tục.
+\subsection{Sự hội tụ trong $L^p$ với $p>0$}
+Dãy $\{X_n\}$ được gọi là hội tụ theo chuẩn $L^p$ nếu:
+$$ \lim\limits_{n \to \infty} \E \left| X_n - X \right| = 0 $$
+\subsection{Bất đẳng thức Lyapunov}
+Với mọi $p \leq q$ ta có các bất đẳng thức sau:
+$$\left( \E\left| X \right|^p \right)^{\frac{1}{p}} \leq \left( \E\left|X\right|^q \right)^{\frac{1}{q}} $$
+$$\|X\|_p \leq \|X\|_q$$
+\begin{remark*}
+Về mối liên hệ giữa các dạng hội tụ
+\begin{itemize}
+    \item Hội tụ hầu chắc chắn có thể suy ra hội tụ theo xác suất.
+    \item Sự hội tụ trong $L^p$ $\left( p>0 \right)$ có thể suy ra hội tụ theo xác suất.
+\end{itemize}
+\end{remark*}
+\begin{exam*}
+Xét dãy $X_n = \begin{cases}
+   0 & \text{với xác suất } 1 - \frac{1}{n}\\
+   n & \text{với xác suất } \frac{1}{n} \end{cases}$. Hãy
+\begin{itemize}
+    \item[i.] Xét sự hội tụ đến 0 theo xác suất.
+    \item[ii.] Xét sự hội tụ trong $L^2$.
+\end{itemize}
+\end{exam*}
+\begin{sol*}
+    \begin{itemize}
+    \item[i.] Với mọi $\varepsilon >0$ thì 
+    \begin{align*}
+        \lim\limits_{n \to \infty}\pp \left( \left| X_n - 0 \right| > \varepsilon \right) = \lim\limits_{n \to \infty}\pp \left(X_n = n \right) = \lim\limits_{n \to \infty} \frac{1}{n} = 0.
+    \end{align*}
+    
+    Chứng tỏ ${X_n}$ hội tụ theo xác suất đến 0.
+    \item[ii.] Xét sự hội tụ trong $L^2$:
+    \[\E \left| X_n - 0 \right|^2 = \E \left| X_n \right|^2 = 0^2 \cdot \left(1 - \frac{1}{n}\right) + n^2 \cdot \frac{1}{n} = n\xrightarrow[]{n\to \infty} \infty.\]
+    Vì vậy, dãy ${X_n}$ không hội tụ trong $L^2$.
+\end{itemize}      
+\end{sol*}
+% ---------------------------------------------------------------------
+\section{Kỳ vọng có điều kiện}
+\begin{defn}[Kỳ vọng có điều kiện]
+    Cho $X$ là biến ngẫu nhiên khả tích (tức là $ \E \left| X \right| < \infty$) và $\mathcal{U}$ là một $\sigma-$ đại số với $\mathcal{U} \subset \mathcal{F}$. Kỳ vọng có điều kiện của $X$ đối với $\mathcal{U}$ là một biến ngẫu nhiên $Y$ nào đó có các tính chất sau:
+    \begin{itemize}
+        \item[i.] $Y$ là $\mathcal{U}-$ đo được, tức là $Y^{-1}(\mathcal{B}) \in \mathcal{U}$ với mọi $\mathcal{B}$ thuộc $\sigma-$đại số Borel của $\R$.
+        \item[ii.] $\E \left[ Y 1_A \right] = \E \left[ X 1_A \right] ~ \forall A \in \mathcal{U} $ và
+        $\displaystyle\displaystyle \int \limits_A Y dP = \displaystyle \int \limits_A X dP ~ \forall A \in \mathcal{U}$ 
+    \end{itemize}
+\end{defn}
+\begin{remark*}
+Ta có thể chứng minh được $Y$ là duy nhất và thường viết $\E \left[ X | \mathcal{U} \right]$ thay vì $Y$. Khi đó $\E \left[ \E \left[ X | \mathcal{U} \right] \right] = \E X$ và $\E \left[ X | \mathcal{F} \right] = X $.     
+\end{remark*}
+\subsection{Một số tính chất của kỳ vọng có điều kiện}
+\begin{itemize}
+    \item[i.] $\E \left[ X | \mathcal{U} \right] \leq \E \left[ Y | \mathcal{U} \right] $ nếu $X \leq Y$.
+    \item[ii.] $\E \left[ X + Y | \mathcal{U} \right] = \E \left[ X | \mathcal{U} \right] + \E \left[ Y | \mathcal{U} \right]$.
+    \item[ii.] $\E \left[ X \cdot Y | \mathcal{U} \right] = Y \cdot \E \left[ X | \mathcal{U} \right] $ nếu $Y$ là $\mathcal{U}-$ đo được.
+    \item[iv.] $\E \left[ \E \left[ X | \mathcal{U} \right]| \mathcal{V} \right] = \E \left[ \E \left[ X | \mathcal{V} \right]| \mathcal{U} \right]  = \E \left[ X | \mathcal{U} \right]$ nếu $\mathcal{U} \subset \mathcal{V}$.
+    \item[v.] (Bất đẳng thức \textit{Jessen}): Cho $g$ là hàm lồi thì $\left[ g(X) | \mathcal{U} \right] \geq g \left( \E \left[ X | \mathcal{U} \right] \right)$.
+    \item[vi.] $\E \left[ X | \mathcal{U} \right] = \E \left[ X  \right]$ nếu $X$ và $\mathcal{U}$ độc lập.
+\end{itemize}
+\begin{exam*}
+    $\left( \E \left[ X | \mathcal{U} \right] \right)^2 \leq \E \left[ X^2 | \mathcal{U} \right].$
+\end{exam*}
+% ---------------------------------------------------------------------
+\section{$\sigma-$đại số sinh bởi một biến ngẫu nhiên}
+\begin{defn}[$\sigma-$đại số sinh bởi một họ các tập con của $\Omega$]
+    Cho $\mathcal{U}$ là một họ các tập con của $\Omega$. Khi đó $\sigma-$ đại số nhỏ nhất chứa $\mathcal{U}$ được gọi là $\sigma-$ đại số sinh bởi $\mathcal{U}$, kí hiệu là $\sigma(\mathcal{U})$ được định nghĩa bởi
+    $$\sigma(\mathcal{U}) = \bigcap \left\{ \sigma-\text{đại số } \mathcal{H}: \mathcal{H} \supset \mathcal{U}  \right\}$$
+\end{defn}
+\begin{defn}[$\sigma-$đại số sinh bởi biến ngẫu nhiên]
+    Cho $X$ là biến ngẫu nhiên và xét tập: $\mathcal{U} = \left\{ X^{-1}(\mathcal{B}): \mathcal{B} \in \R \text{ là tập Borel}  \right\}$. Khi đó ta gọi $\sigma(\mathcal{U})$ là $\sigma-$ đại số sinh bởi biến ngẫu nhiên $X$. Để nhấn mạnh sự phụ thuộc vào X ta viết $\sigma(\mathcal{X})$ thay vì $\sigma(\mathcal{U})$. 
+\end{defn}
+\begin{remark*}
+Cho $X$ là biến ngẫu nhiên và $\mathcal{U}$ là một $\sigma-$ đại số. Ta nói $X$ và $\mathcal{U}$ là độc lập nếu các biến cố $A$ và $B$ là độc lập với mọi $A \in \sigma(X)$, $B \in \mathcal{U}$.
+\end{remark*}
+\begin{defn}[Kỳ vọng có điều kiện của hai biến ngẫu nhiên]
+    Cho $X$ và $Y$ là hai biến ngẫu nhiên. Kỳ vọng có điều kiện của $X$ đối với $Y$ kí hiệu là $\E \left[ X | Y \right]$ và được tính bởi $\E \left[ X | Y \right] = \E \left[ X | \sigma(X) \right]$.
+\end{defn}

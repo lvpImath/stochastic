@@ -1,0 +1,134 @@
+\ProvidesPackage{macros}
+\newif\if@myfiledraft
+\DeclareOption{draft}{\@myfiledrafttrue}
+
+\ProcessOptions\relax
+
+\if@myfiledraft
+  \newcommand{\myterm}[1]{\emph{#1}\marginpar{TERM: #1}}
+\else
+  \newcommand{\myterm}[1]{\emph{#1}}
+\fi
+%---------------------------------------------------------------
+\usepackage[utf8]{vietnam}
+\usepackage[a4paper]{geometry}
+\usepackage{babel}
+% \geometry{verbose,tmargin=2cm ,bmargin=2cm,lmargin=2.5cm,rmargin=2cm}
+% \setlength{\parskip}{\smallskipamount}
+% \setlength{\parindent}{0pt}
+%---------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{commath}
+\usetikzlibrary{arrows}
+\usepackage{setspace}
+\usepackage{bbm}
+%-------------------------------------------------------------------------
+\usepackage{pgfplots}
+\usepackage{pdfpages}
+\usepackage{graphicx} %package to manage images
+\graphicspath{ {./images/} }
+\usepackage[rightcaption]{sidecap}
+\usepackage{wrapfig}
+\pgfplotsset{compat=1.18}
+%-------------------------------------------------------------------------
+\onehalfspacing
+\usepackage[unicode=true, pdfusetitle, bookmarks=true, bookmarksnumbered=false, bookmarksopen=false, breaklinks=false, pdfborder={0 0 1}, backref=false, colorlinks=false]{hyperref}
+%---------------------------------------------------------------
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Mat}{\text{Mat}}
+\newcommand{\SL}{\text{SL}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\Span}{\text{Span}}
+\newcommand{\PSL}{\text{PSL}}
+\newcommand{\Isom}{\text{Isom}}
+\newcommand{\Id}{\text{Id}}
+\newcommand{\im}{\text{Im}}
+\newcommand{\re}{\text{Re}}
+\newcommand{\tr}{\text{tr}}
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\const}{\text{const}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\ff}{\mathbb{F}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\dv}{\text{d}}
+\newcommand{\pp}{\mathbb{P}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\N}{\mathrm{N}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\qtnn}{\text{quá trình ngẫu nhiên }}
+\newcommand{\bnn}{\text{biến ngẫu nhiên }}
+%---------------------------------------------------------------
+\makeatletter
+%---------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{section}{chapter}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\theoremstyle{plain}
+\newtheorem{thm}{\protect\theoremname}[section]
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{\protect\definitionname}
+\theoremstyle{plain}
+\newtheorem{prop}[thm]{\protect\propositionname}
+\theoremstyle{plain}
+\newtheorem{lem}[thm]{\protect\lemmaname}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{\protect\corollaryname}
+\theoremstyle{definition}
+\newtheorem{ex}[thm]{\protect\exercisename}
+\theoremstyle{definition}
+\newtheorem*{sol*}{\protect\solutionname}
+\theoremstyle{definition}
+\newtheorem*{exam*}{\protect\examplename}
+\theoremstyle{definition}
+\newtheorem*{remark*}{\protect\remarkname}
+\theoremstyle{definition}
+\newtheorem*{comment*}{\protect\comment}
+\theoremstyle{definition}
+\newtheorem*{question*}{\protect\questionname}
+%---------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\providecommand{\definitionname}{Đ\d{i}nh nghĩa}
+\providecommand{\examplename}{\textbf{Ví d\d{u}}}
+\providecommand{\exercisename}{\textbf{Bài tập}}
+\providecommand{\remarkname}{\textbf{Lưu ý}}
+\providecommand{\comment}{\textbf{Nhận xét}}
+\providecommand{\theoremname}{\textbf{Đ\d{i}nh lí}}
+\providecommand{\propositionname}{\textbf{Mệnh đề}}
+\providecommand{\lemmaname}{\textbf{Bổ đề}}
+\providecommand{\questionname}{\textbf{Câu hỏi}}
+\providecommand{\corollaryname}{Hệ quả}
+\providecommand{\proofname}{\textbf{Chứng minh}}
+\providecommand{\solutionname}{\textbf{Lời giải}}
+\providecommand{\problemname}{\textbf{Bài tập}}
+%---------------------------------------------------------------
+\makeatother
+%---------------------------------------------------------------
+\providecommand{\corollaryname}{Corollary}
+\providecommand{\definitionname}{Definition}
+\providecommand{\exercisename}{Exercise}
+\providecommand{\lemmaname}{Lemma}
+\providecommand{\propositionname}{Proposition}
+\providecommand{\solutionname}{Solution}
+\providecommand{\theoremname}{Theorem}
+%---------------------------------------------------------------
+\newcommand{\definitionautorefname}{Definition}
+\newcommand{\lemmaautorefname}{Lemma}
+\newcommand{\remarkautorefname}{Remark}
+\newcommand{\propositionautorefname}{Proposition}
+\newcommand{\exampleautorefname}{Example}
+%---------------------------------------------------------------
+\endinput

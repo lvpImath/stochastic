@@ -1,0 +1,307 @@
+\chapter{Tích phân I-tô}
+\section{Tích phân Itô}
+Mục tiêu của chương này là định nghĩa được tích phân $\displaystyle \displaystyle \int _{0}^{T}f_tdB_t$. \\
+Như đã biết  
+\[
+    \displaystyle \displaystyle \int _{0}^{T}f(x)dg(x)\coloneqq \lim\limits_{n\to \infty}\sum_{k=1}^nf(\xi_k)[g(t_k)-g(t_{k-1})]
+\] 
+với  $\mathcal{P}: 0=t_0<t_1<\ldots<t_n=T$ là một phân hoạch của đoạn $[0,T]$ sao cho $d(\mathcal{P})\coloneqq \max\limits_{k}\{(t_k-t_{k-1})\}\xrightarrow[]{n\to \infty} 0$ và $\xi = (\xi_1,\ldots,\xi_n)$ là một cách chọn điểm sao cho $\xi_k \in [t_{k-1},t_k]$.
+Vì vậy ta mong muốn  
+\[
+    \displaystyle \displaystyle \int _{0}^{T}f_tdB_t \coloneqq \displaystyle \displaystyle \int _{0}^{T}f(x)dg(x)\coloneqq \lim\limits_{n\to \infty}\sum_{k=1}^nf(\xi_k)(B(t_k)-B(t_{k-1}))
+\] 
+với câu hỏi cần giải quyết là giới hạn trên phải hiểu theo nghĩa nào?
+\begin{defn}[Bộ lọc sinh bởi chuyển động Brown]
+    Ta gọi $\ff = (\F_t)_{t\in [0, T]}$ là một bộ lọc sinh bởi chuyển động Brown nếu với mỗi $t$ thì $\F_t$ là một $\sigma-$đại số sinh bới các biến ngẫu nhiên $B_s~(s \leq t)$. Khi đó
+    \begin{itemize}
+        \item[i)]Không gian xác suất $(\Omega, \F, \ff, \pp)$ được gọi là không gian xác suất có lọc sinh bởi chuyển động Brown $B$.
+        \item[ii)]Quá trình ngẫu nhiên $(f_t)_{t\in [0, T]}$ được gọi là $\ff-$tương thích nếu $f_t$ là một biến ngẫu nhiên $\F_t-$đo được với mọi $t\in [0,T]$.
+        \item[iii)] Nếu $f$ là $\ff_t-$tương thích thì tồn tại hàm $g$ sao cho $f_t=g(B_s|s\leq t)$.
+    \end{itemize}
+\end{defn}
+\begin{exam*}
+    Các hàm $\sin (B_t),~\cos(B_t) + B_t^2,~B_t+\sqrt{\max\limits_{0\leq s\leq t}{B_s}}$ là $\ff_t-$tương thích, còn $\sin (B_{2t})$ thì không.
+\end{exam*}
+\begin{defn}
+    Ta kí hiệu $L_a^2(\Omega \times [0,T])$ là không gian các quá trình ngẫu nhiên thoả mãn
+    \begin{itemize}
+        \item[i)] $f=(f_t)_{t\in [0, T]}$ là $\ff-$tương thích.
+        \item[ii)] $\E\big[\displaystyle \int_{0}^{T}f_t^2dt\big]<\infty=\displaystyle \int_{0}^{T}\E[f_t^2]dt<\infty$(bình phương khả tích).
+    \end{itemize}
+\end{defn}
+\begin{defn}[Quá trình ngẫu nhiên đơn giản]
+    Ta gọi $f=(f_t)_{t\in [0, T]}$ là một quá trình ngẫu nhiên đơn giản nếu nó có dạng $f_t = \sum\limits_{k=0}^{n-1}e_k\mathbbm{1}_{[t_{k}, t_{k+1}]}(t)$ với $e_k$ là biến ngẫu nhiên $\F_{t_k}-$đo được và bình phương khả tích.
+ \end{defn}
+Các tính chất của tích phân I-tô cho quá trình ngẫu nhiên đơn giản
+\begin{itemize}
+    \item[i)] $\E\Big[\displaystyle \int_{0}^{T}f_tdB_t\Big]=0$.
+    Thật vậy, ta có
+    \begin{align*}
+    \E\displaystyle \int_{0}^{T}f_tdB_t&=\E\Big[\sum\limits_{k=0}^{n-1}e_k(B_{t_{k+1}}-B_{t_{k}})\Big]\\
+        &= \sum\limits_{k=0}^{n-1}\E\Big[ \E\Big[e_k(B_{t_{k+1}}-B_{t_{k}})|\F_{t_k}\Big]\Big]\\
+        &= \sum\limits_{k=0}^{n-1}\E\Big[ e_k\E\Big[(B_{t_{k+1}}-B_{t_{k}})|\F_{t_k}\Big]\Big](\text{do } (B_{t_{k+1}}-B_{t_k}) \text{ và } \F_{t_k} \text{ là độc lập}).\\
+        &= \sum\limits_{k=0}^{n-1}\E\Big[ e_k\E\Big[(B_{t_{k+1}}-B_{t_{k}})\Big]\Big]\\
+        &= \sum\limits_{k=0}^{n-1}\E\Big[ e_k\cdot0\Big]= 0.
+    \end{align*}
+    \item[ii)] Nếu $f_t \leq g_t$ thì liệu $\displaystyle \int_{0}^{T}f_tdB_t \leq \displaystyle \int_{0}^{T}g_tdB_t$. Câu trả lời là không! Ví dụ phản chứng $\displaystyle \int_{0}^{T}1dB_t=B_1$ còn $\displaystyle \int_{0}^{T}2dB_t=2B_1$, còn $B_1$ và $ 2B_1$ là không so sánh được.
+    \item[iii)](Tuyến tính) $\displaystyle \int_{0}^{T}(af_t+bg_t)dB_t=\displaystyle a\displaystyle \int_{0}^{T}f_tdB_t + b\displaystyle \int_{0}^{T}g_tdB_t$.
+    \item[iv)](Đẳng cự I-tô) $ \E\Big[\displaystyle \int_{0}^{T}f_tdB_t\Big]^2 = \E\Big[\displaystyle \int_{0}^{T}f_t^2dt\Big]$.
+\end{itemize}
+% ---------------------------------------------------------------------
+\textbf{Mục tiêu}: Định nghĩa tích phân Itô cho quá trình ngẫu nhiên bất kỳ trong $ L_a^2(\Omega \times [0,T])$ với $ L^2(\Omega \times [0,T]) = \E \displaystyle \int_0^T f^2(t,\omega)dt$.\\
+\textbf{Ý tưởng}: Cho $f \in L_a^2(\Omega \times [0,T])$. Ta xấp xỉ $f$ bởi dãy $(g_n)_{n \geq 1}$ các quá trình ngẫu nhiên đơn giản và định nghĩa $\displaystyle \int \limits f_t dB_t = \lim\limits_{n \to \infty}\displaystyle \int \limits g_n(t) dB_t$ trong $L^2(\Omega)$. Ta thực hiện ý tưởng này trong 3 bước:
+\begin{lem}
+    Cho $ f \in L_a^2(\Omega \times [0,T])$. Khi đó tồn tại dãy các quá trình ngẫu nhiên bị chặn $(h_t^{(n)})_{n \geq 1} \subset L_a^2(\Omega \times [0,T])$ sao cho: 
+    \begin{equation}
+         \E \displaystyle \int_0^T \left|f_t - h_t^{(n)} \right|^2 dt \longrightarrow 0 \text{ khi } n \to \infty \label{2.1}
+    \end{equation}
+\end{lem}
+\begin{sol*}
+    Cho mỗi số tự nhiên $n$, ta định nghĩa: $h_t^{(n)} =$
+    $\left \{ \begin{matrix}
+    n & f_t \leqslant -n \\
+    f_t & -n < f_t < n  \\
+    n & f_t\geqslant n
+    \end{matrix}\right.$
+    suy ra, $|h_t^{(n)}| \leqslant n \leqslant |f_t|$ $\forall n$ và ta có: $h_t^{(n)} \rightarrow f_t$ khi $n \rightarrow \infty$ với mỗi $(t, \omega)$. Dùng định lý hội tụ bị chặn ta có (2.1)
+\end{sol*}
+\begin{lem}
+    Cho $f \in L_a^2(\Omega \times [0, T])$ là quá trình ngẫu nhiên bị chặn. Khi đó, tồn tại các quá trình ngẫu nhiên bị chặn và liên tục $\Big( h_t^{(n)}\Big)_{t\geqslant 1}$ sao cho \eqref{2.1} đúng.
+\end{lem}
+\begin{sol*}
+    Cho mỗi số tự nhiên $n$, ta xét hàm không âm và liên tục $\psi_n$ trên $\R$ thỏa mãn:
+    \begin{itemize}
+        \item [i)] $\psi_n(x) = 0$ nếu $x \leqslant -\dfrac{1}{n}$ hoặc $x \geqslant 0.$
+        \item [ii)] $\displaystyle \int_{\R} \psi_n(x)dx = 1.$
+    \end{itemize}
+    Ta định nghĩa quá trình ngẫu nhiên $h_t^{(n)}$ như sau: $h_t^{(n)} = \displaystyle \int _{0}^{t}\psi_n(s-t).f_sds$. Suy ra, 
+    \begin{align*}
+    \Big|h_t^{(n)}\Big| &\leqslant \displaystyle \int _{0}^{t}\psi_n(s - t)ds.\displaystyle\max_{(s, \omega)}|f_s|&\\
+        &= \displaystyle \int _{-t}^{0}\psi_n(x)dx.\displaystyle\max_{(s,\omega)}|f_s|&\\
+        &\leqslant \displaystyle \int_{\R}\psi_n(x)dx.\displaystyle\max_{(s, \omega)}|f_s|&\\
+        &= \displaystyle\max_{(s, \omega)}|f_s| 
+    \end{align*}
+    Do đó, $h_t^{(n)}$ bị chặn.
+\end{sol*}
+% ---------------------------------------------------------------------
+Hơn nữa ta có: \[\left|h_{t_1}^{(n)} - h_{t_2}^{(n)} \right| = \left| \displaystyle \int_{0}^{t_1} \psi_n(s-t_1)f_sds - \displaystyle \int_{0}^{t_2} \psi_n(s-t_2)f_sds  \right| \quad \forall t_1,t_2 .\]
+Giả sử $t_1 < t_2$, khi đó: \[\left|h_{t_1}^{(n)} - h_{t_2}^{(n)} \right| = \left| \displaystyle \int_{0}^{t_1} \left(\psi_n(s-t_1) - \psi_n(s-t_2) \right)f_sds - \displaystyle \int_{t_1}^{t_2} \psi_n(s-t_2)f_sds  \right|. \]
+Vì $\psi_n$ là hàm bị chặn với mỗi n cố định. Do đó, tồn tại $c>0$ thoả mãn:
+\[\left| \displaystyle \int_{t_1}^{t_2} \psi_n(s-t_2)f_sds \right| \leq c(t_2-t_1) \longrightarrow 0 \text{ khi } t_2 \to t_1. \]
+Mặt khác, bởi tính liên tục của $\psi_n$ và Định lý hội tụ bị chặn, ta có:
+\[\left|\displaystyle \int_{0}^{t_1} \left(\psi_n(s-t_1) - \psi_n(s-t_2) \right)f_sds \right| \longrightarrow 0 \text{ khi } t_2 \to t_1 . \]
+Vậy $h_t^{(n)}$ là liên tục. Cuối cùng ta cần chứng minh: 
+\[ \E \displaystyle \int_0^T \left|f_t - h_t^{(n)} \right|^2 dt \longrightarrow 0 \text{ khi } n \to \infty. \]
+Chú ý ta có $h_t^{(n)} \to f_t$ với mỗi $(t, \omega)$. Do đó, ta có thể sử dụng Định lý hội tụ bị chặn để kết thúc chứng minh.
+\begin{lem}
+    Cho f là quá trình ngẫu nhiên liên tục và bị chặn thuộc $L_a^2(\Omega \times [0,T])$. Khi đó, tồn tại dãy các quá trình ngẫu nhiên đơn giản $h_t^{(n)}$ trong $L_a^2(\Omega \times [0,T])$ thoả mãn \eqref{2.1} đúng.
+\end{lem}
+\begin{proof}
+    Xét phân hoạch $0 = t_0 < t_1 < \dots < t_n = T$ và định nghĩa quá trình ngẫu nhiên $h_t^{(n)} = \sum\limits_{K=0}^{n-1}f_{t_K}1_{[t_K;t_{K+1})}(t)$. Với mỗi t bất kỳ thì t phải thuộc đoạn $[t_K;t_{K+1})$ nào đó. Khi đó $h_t^{(n)} = f_{t_K}$ có thể suy ra: \[ \left|h_t^{(n)} = f_{t_K}\right| = |f_t-f_{t_K}| \longrightarrow 0 \text{ khi } n \to \infty\] vì $f$ là liên tục. Dùng Định lý hội tụ để kết thúc chứng minh.
+\end{proof}
+\begin{defn}[Tích phân Itô cho quá trình ngẫu nhiên bất kỳ]
+    Cho $ f \in L_a^2(\Omega \times [0,T])$. Xét $h_t^{(n)}$ là các dãy quá trình ngẫu nhiên đơn giản trong $L_a^2(\Omega \times [0,T])$ thoả mãn: \[ \E \displaystyle \int_0^T \left|f_t - f_t^{(n)} \right|^2 dt \longrightarrow 0 \text{ khi } n \to \infty. \]
+    Khi đó ta định nghĩa tích phân Itô của $f$ là:
+    \[ \displaystyle \int_0^T f_t dB_t = \lim\limits_{n \to \infty} \displaystyle \int_0^T h_t^{(n)} dB_t \text{ trong } L^2(\Omega).\]
+\end{defn}
+\begin{comment*}
+Nếu $g_t^{(n)}$ là một xấp xỉ khác của $f_t$ thì ta có:
+\[\E \displaystyle \int_0^T \left|g_t^{(n)}-h_t^{(n)}\right|^2 dt \leq 2\E \displaystyle \int_0^T \left|f_t-g_t^{(n)}\right|^2 dt + 2\E \displaystyle \int_0^T \left|f_t-h_t^{(n)}\right|^2 dt \xrightarrow[]{n\to \infty} 0.\]
+và từ đó ta có:
+\begin{align*}
+    \E \left|\displaystyle \int_0^T h_t^{(n)} dB_t - \displaystyle \int_0^T g_t^{(n)} dB_t \right| &= \E \left(\displaystyle \int_0^T \left(h_t^{(n)}- g_t^{(n)} \right) dB_t \right)^2\\
+    &= \E \displaystyle \int_0^T \left|h_t^{(n)}- g_t^{(n)}\right|^2 dt \longrightarrow 0 \text{ khi } n \to \infty.
+\end{align*}
+Vậy định nghĩa của tích phân Itô không phụ thuộc vào lựa chọn cách xấp xỉ hàm $f$.
+\end{comment*}
+\begin{remark*}
+Tích phân Itô cho quá trình ngẫu nhiên bất kỳ vừa định nghĩ có tất cả các tính chất như tích phân Itô cho quá trình ngẫu nhiên đơn giản. Cụ thể:
+\begin{itemize}
+    \item $\E \displaystyle \int_0^T f_t dB_t = 0$.
+    \item $E \left(\displaystyle \int_0^T f_t dB_t \right)^2 = \E \displaystyle \int_0^T f_t^2 dB_t$ (Công thức đẳng cự Itô).
+\end{itemize}
+\end{remark*}
+\begin{exam*}
+Tính tích phân $\displaystyle \int_0^t B_s dB_s$ bằng định nghĩa.
+\begin{sol*}
+    Ta cần xấp xỉ $B_s$ bởi quá trình ngẫu nhiên đơn giản. Xét phân hoạch $0 = t_0 < t_1 < \dots < t_n = T$ và quá trình ngẫu nhiên đơn giản $h_s^{(n)} = \sum\limits_{K=0}^{n-1}B_{t_K}1_{t_K;t_{K+1}}(s)$. Ta có:
+    \begin{align*}
+        \displaystyle \int_0^t h_s^{(n)} dB_s &= \sum\limits_{K=0}^{n-1}B_{t_K}(B_{t_{K+1}}-B_{t_K})\\
+        &= -\dfrac{1}{2}\sum\limits_{K=0}^{n-1}(B_{t_{K+1}}-B_{t_K})^2 +\dfrac{1}{2}\sum\limits_{K=0}^{n-1}(B_{t_{K+1}}^2-B_{t_K}^2)
+    \end{align*}
+    Do biến phân bậc 2 của chuyển động Brown trên $[0.t]$ là $t$ nên ta có:
+    \[\sum\limits_{K=0}^{n-1}(B_{t_{K+1}}-B_{t_K})^2 \longrightarrow t \text{ khi } n \to \infty.\]
+    Mặt khác hiển nhiên ta có: 
+    \[\sum\limits_{K=0}^{n-1}(B_{t_{K+1}}^2-B_{t_K}^2) = B_{t_K}^2-B_0^2 = B_t^2-B_0^2 = B_t^2.\]
+    Vậy $\displaystyle \int_0^t B_s dB_s = \dfrac{1}{2}B_t^2 - \dfrac{t}{2}$.
+\end{sol*}
+\end{exam*}
+\begin{exam*}
+Tính tích phân $\displaystyle \int_0^t s dB_s$ bằng định nghĩa.
+\begin{sol*} Xét $h_s^{n} = \sum\limits_{K=0}^{n-1}t_K 1_{[t_K,t_{K+1})}(s)$, $0=t_0<t_1<...<t_n=t$ và $ \max\limits_{K=\overline{0, n-1}}|t_{K+1}-t_K|\rightarrow 0$ khi $n\rightarrow +\infty$. Ta có: $f_s - h_s^{(n)}= s.t_K$, nếu $s \in [t_K; t_{K-1})$ với $K=\overline{0,n-1}$.\\ Suy ra: $\displaystyle \int_0^t|f_s-h_s^{(n)}|^2ds = \displaystyle\sum\limits_{K=0}^{n-1}\displaystyle \int_{t_K}^{t_{K+1}}|s-t_K|^2ds = \dfrac{1}{3}\displaystyle\sum\limits_{K=0}^{n-1}(t_{K+1}-t_K)^2$.\\ Từ đó: $\E\left[\displaystyle \int_0^t|f_s - h_s^{(n)}|^2ds\right]=\dfrac{1}{3}\sum\limits_{K=0}^{n-1}(t_{K+1}-t_K)^2\leqslant \dfrac{1}{3}\max\limits_{K=\overline{0,n-1}}|t_{K+1}-t_K|^2\to 0$ khi $n\to \infty$.\\ Do đó: $\displaystyle \int_0^tsdB_s = \displaystyle \int_0^tf_sdB_s = \lim\limits_{n\to +\infty}\displaystyle \int_0^th_s^{(n)}dB_s$ trong $L^2(\Omega)$.\\ Ta có: 
+\begin{align*}
+    \displaystyle \int_0^th_s^{(n)}dB_s&= \displaystyle \int_0^t\sum\limits_{K=0}^{n-1}t_K.1_{[t_K; t_{K+1})}(s)dB_s\\
+    &= \sum\limits_{K=0}^{n-1}t_K(B_{t_{K+1}}-B_{t_K})\\
+    &= \left \{ \begin{matrix} \displaystyle\sum\limits_{K=0}^{n-1}\big(t_{K+1}.B_{t_{K+1}}-t_K.B_{t_K}-B_{t_{K+1}}(t_{K+1}-t_K)\big)\\ t.B_t-\sum\limits_{K=0}^{n-1}(t_{K+1}-t_K).B_{t_{K+1}}
+    \end{matrix}\right.
+\end{align*}
+Mà: $\displaystyle\sum\limits_{K=0}^{n-1}B_{t_{K+1}}(t_{K+1}-t_K)\longrightarrow \displaystyle \int_0^tB_sds$ khi $n\to +\infty$ trong $L^2(\Omega)$.\\ Nên: $\lim\limits_{n\to +\infty}\displaystyle \int_0^th_s^{(n)}dB_s=t.B_t- \displaystyle \int_0^tB_sds$ trong $L^2(\Omega)$.\\ Vậy $\displaystyle \int_0^tsdB_s = t.B_t - \displaystyle \int_0^t B_sds$.
+\end{sol*}
+\end{exam*}
+\begin{thm}[Công thức tích phân từng phần] Cho $f\in L_a^2(\Omega\times[0, T])$ thoả mãn $f$ có biến phân bậc nhất hữu hạn. Khi đó, ta có: \[\displaystyle \int_0^tf_sdB_s = f_sB_s\Big|_0^t - \displaystyle \int_0^tB_sdf_s.\] Đặc biệt, nếu $s\mapsto f_s$ là khả vi thì: \[\displaystyle \int_0^tf_sdB_s = f_tB_t - \displaystyle \int_0^tB_s.f'_sds.\]    
+\end{thm}
+\begin{exam*}
+Tính $\displaystyle \int_0^tsin(s)dB_s$.
+\begin{sol*}
+    Ta có: $\displaystyle \int_0^tsin(s)dB_s = sin(s).B_s\Big|_0^t-\displaystyle \int_0^tB_s.cos(s)ds = t.B_t-\displaystyle \int_0^tB_s.cos(s)ds$.
+\end{sol*}
+\end{exam*}
+\begin{exam*}
+Tính $\displaystyle \int_0^tB_s^2dB_s$.
+\begin{sol*}
+Xét phân hoạch $0=t_0<t_1<...<t_n=t$\\
+    \textbf{Bước 1} Xét: $h_t^{(n)} = \displaystyle\sum\limits_{K=0}^{n-1}B_{t_K}^2.1_{[t_K; t_{K+1})}(t) \longrightarrow B_t^2$\\
+   \textbf{Bước 2} \[\displaystyle \int_0^t h_s^{(n)}dB_s = \sum\limits_{K=0}^{n-1}B_{t_K}^2(B_{t_{K+1}}-B_{t_K}).\] Sử dụng đồng nhất thức: $a^2(b-a)=\dfrac{1}{3}(b^3-a^3)-a(b-a)^2-\dfrac{1}{3}(b-a)^3$. Ta có:
+\begin{align*}
+    \displaystyle \int_0^t h_s^{(n)}dB_s 
+    &= \dfrac{1}{3}\sum\limits_{K=0}^{n-1}(B_{t_{K+1}}^3-B_{t_K}^3) - \sum\limits_{K=0}^{n-1}B_{t_K}(B_{t_{K+1}}-B_{t_K})^2-\dfrac{1}{3}\sum\limits_{K=0}^{n-1}(B_{t_{K+1}}-B_{t_K})^3\\
+    &=\dfrac{1}{3}(B_t^3-B_0^3)-\sum\limits_{K=0}^{n-1}B_{t_K}(B_{t_{K+1}}-B_{t_K})\\
+    &-\sum\limits_{K=0}^{n-1}B_{t_K}\left((B_{t_{K+1}}-B_{t_K})^2-(t_{K+1}-t_K)\right)
+   -\dfrac{1}{3}\sum\limits_{K=0}^{n-1}(B_{t_{K+1}}-B_{t_K})^3.
+\end{align*}
+Vì biến phân bậc 3 của chuyển động Brown bằng 0 nên $\lim\limits_{n \to \infty} \sum\limits_{K=0}^{n-1}(B_{t_{K+1}}-B_{t_K})^3 = 0 $. Mà theo định nghĩa của tích phân Riemann thì \[\lim\limits_{n \to \infty} \sum\limits_{K=0}^{n-1}B_{t_K}(B_{t_{K+1}}-B_{t_K}) = \displaystyle \int_0^tB_sds.\]
+Ta có: 
+\begin{align*}
+    &\E \left(\sum\limits_{K=0}^{n-1}B_{t_K}\left((B_{t_{K+1}}-B_{t_K})^2-(t_{K+1}-t_K)\right)\right)^2\\
+    &=\E \sum\limits_{K=0}^{n-1}B_{t_K}^2 \left((B_{t_{K+1}}-B_{t_K})^2-(t_{K+1}-t_K)\right)^2\\
+    &+ 2\E\sum\limits_{K<j}B_{t_K}\left((B_{t_{K+1}}-B_{t_K})^2-(t_{K+1}-t_K)\right)B_{t_j}\left((B_{t_{j+1}}-B_{t_j})^2-(t_{j+1}-t_j)\right)\\
+    &= \sum\limits_{K=0}^{n-1} \E \left[B_{t_K}^2\left((B_{t_{K+1}}-B_{t_K})^2-(t_{K+1}-t_K)\right)^2\right]\\
+    &= \sum\limits_{K=0}^{n-1} t_K \E \left((B_{t_{K+1}}-B_{t_K})^2-(t_{K+1}-t_K)\right)^2 \\
+    &= \sum\limits_{K=0}^{n-1} t_K \left(3(t_{K+1}-t_K)^2-2(t_{K+1}-t_K)^2+(t_{K+1}-t_K)^2\right)\\
+    &= 2 \sum\limits_{K=0}^{n-1} t_K (t_{K+1}-t_K)^2 \leq \max\limits_K (t_{K+1}-t_K)\sum\limits_{K=0}^{n-1} t_K(t_{K+1}-t_K) \longrightarrow 0 \displaystyle \int_0^t sds = 0.
+\end{align*}
+Vậy $\displaystyle \int_0^t B_s^2dB_s = \dfrac{B_t^3}{3}-\displaystyle \int_0^t B_sds.$ 
+\end{sol*}
+\end{exam*}
+\begin{exam*}
+Xét quá trình ngẫu nhiên $X_t = \displaystyle \int_0^t B_s^2 dB_s$. Tính hàm Covariance: $R(s,t)=\E[X_t \cdot X_s] = \E[X_t]\E[X_s]. $
+\begin{sol*}
+    Xét với $s<t$:
+    \begin{align*}
+        R(s,t) &= \E \left[\displaystyle \int_0^t B_u^2 dB_u\displaystyle \int_0^s B_u^2 dB_u  \right]\\
+        &= \E \left[\displaystyle \int_0^t B_u^2 dB_u\displaystyle \int_0^t B_u^2 1_{[0,s]}(u) dB_u.\right]
+    \end{align*}
+    Sử dụng công thức đẳng cự Itô ta có:
+    \begin{align*}
+         R(s,t) &= \E \displaystyle \int_0^t B_u^4 1_{[0,s]}(u) du\\
+         & = \E \displaystyle \int_0^s B_u^4 du = \displaystyle \int_o^s 3u^2 du = s^3 = (min(s,t))^3.
+    \end{align*}
+\end{sol*}
+\end{exam*}
+\begin{exam*}
+Tính $\E X_t^2$ với $X_t =\displaystyle \int_0^t \e^{B_s} dB_s$, $ 0\leq t <T .$
+\begin{sol*}
+Với $0\leq t <T$ ta có:
+    \begin{align*}
+        \E X_t^2 &= \E \left[\displaystyle \int_0^t \e^{B_s} dB_s \displaystyle \int_0^t \e^{B_s} dB_s  \right]\\
+        &= \E \left[\displaystyle \int_0^t \e^{2B_s} dB_s  \right] = \displaystyle \int_0^t \E (\e^{2B_s}) dB_s  \\
+        &= \displaystyle \int_0^t \e^{\dfrac{2^2 s}{2}} ds = \displaystyle \int_0^t \e^{2s} ds = \dfrac{\e^{2s}}{2} \bigg|_0^t  = \dfrac{\e^{2t}-1}{2}.   
+    \end{align*}
+\end{sol*}
+\end{exam*}
+% ---------------------------------------------------------------------
+\section{Một số bất đẳng thức moment}
+\subsection{Bất đẳng thức Burkholde - David - Gundy (BGD)} Xét tích phân Itô $\displaystyle \int_0^tf_sdB_s$, với $0\leqslant t\leqslant T$. Khi đó, $\forall p\geqslant 2$ ta có: 
+\[ c_p.\E\Big(\displaystyle \int_0^T f_s^2ds\Big)^{\dfrac{p}{2}} \leqslant \E\Big|\displaystyle\max_{t\in[0;T]}\displaystyle \int_0^Tf_sdB_s\Big|^p \leqslant C_p.\E\Big(\displaystyle \int_0^Tf_s^2ds\Big)^{\dfrac{p}{2}}.\]\\ với $c_p, C_p$ là các hằng số phụ thuộc vào $p$.
+\begin{remark*}
+Sử dụng bất đẳng thức Holder ta có: 
+\[\displaystyle \int_0^Tf_s^2ds \leqslant \Big(\displaystyle \int_0^T(f_s^2)^{\dfrac{p}{2}}ds\Big)^{\dfrac{2}{p}}.\Big(\displaystyle \int_0^T1^qds\Big)^{\dfrac{1}{q}} = \Big(\displaystyle \int_0^T|f_s|^pds\Big)^{\dfrac{2}{p}}.T^{\dfrac{p-2}{p}}\] với $\dfrac{1}{q} + \dfrac{1}{p/2} =1$. Do đó, $\E\Big(\displaystyle \int_0^Tf_s^2ds\Big)^{\dfrac{p}{2}} \leqslant T^{\dfrac{p-2}{2}}.\E\Big(\displaystyle \int_0^T|f_s|^pds\Big)$.
+\end{remark*}
+\subsection{Bất đẳng thức Martingale Doob} 
+Ta có 
+\[\pp\Bigg(\displaystyle\max_{t\in[0,T]}\Big|\displaystyle \int_0^tf_sdB_s\Big| \geqslant x\Bigg) \leqslant \dfrac{\E\Big|\displaystyle \int_0^Tf_sdB_s\Big|^p}{x^p}. \forall x>0, p \geqslant 1.\]
+Đặc biệt ta có: 
+\[\pp\Bigg(\displaystyle\max_{t\in[0;T]}\Big|\displaystyle \int_0^tf_sdB_s\Big| \geqslant x\Bigg) \leqslant \dfrac{\E\Big|\displaystyle \int_0^Tf_sdB_s\Big|^2}{x^2} = \dfrac{\E\Big(\displaystyle \int_0^Tf_s^2ds\Big)}{x^2}.\]
+%----------------------------------------------------------------------
+\begin{exam*}
+Ước lượng $\E\Big|\displaystyle \int_0^1\sqrt{1+B_s^2}dB_s\Big|^4$.
+\begin{sol*}
+    Ta có: $\E\bigg|\displaystyle \int_0^1\sqrt{1+B_s^2}dB_s\bigg|^4 \leqslant \E\bigg(\displaystyle\max_{t\in[0,1]}\Big|\displaystyle \int_0^t\sqrt{1+B_s^2}dB_s\Big|^4\bigg)$.\\
+    Áp dụng bất đẳng thức Burkholde - David - Gundy, ta có: 
+    \begin{align*}
+        \E\bigg|\displaystyle \int_0^1\sqrt{1+B_s^2}dB_s\bigg|^4 
+        &\leqslant c_4.\E\bigg(\displaystyle \int_0^1(1+B_s^2)ds\bigg)^2\\
+        &\leqslant c_4.\E\bigg(\displaystyle \int_0^1(1+B_s^2)^2ds\bigg)\\
+        &= c_4.\displaystyle \int_0^1\E(1+2B_s^2+B_s^4)ds\\
+        &= c_4.\displaystyle \int_0^1(1+2s+3s^2)ds\\
+        &= c_4.(s+s^2+s^3)\Big|_0^1\\
+        &= 3c_4.
+    \end{align*}
+\end{sol*}
+\end{exam*}
+% ---------------------------------------------------------------------
+\begin{exam*}
+Ước lượng $\E \left|\displaystyle \int_0^t f_s dB_s - \displaystyle \int_0^u f_s dB_s \right|^p$ với $p \geq 2$ và $t,u \in [0,T]$.
+\begin{sol*}
+    Giả sử $u \leq t$, khi đó ta có:
+    \begin{align*}
+         I &= \E \left|\displaystyle \int_0^t f_s dB_s - \displaystyle \int_0^u f_s dB_s \right|^p\\
+         &= \E \left|\displaystyle \int_u^t f_s dB_s \right|^p = \E \left|\displaystyle \int_0^t f_s 1_{[u,t]}(s) dB_s \right|^p.
+    \end{align*}
+   Áp dụng bất đẳng thức Burkholde - David - Gundy, ta có:
+   \[I \leq \E \left(\displaystyle \int_0^t f_s^2 1_{[u,t]}(s) ds \right)^{\dfrac{p}{2}} = \E \left(\displaystyle \int_u^t f_s^2 ds \right)^{\dfrac{p}{2}}.\]
+   Sử dụng bất đẳng thức Holder ta có:
+   \[I \leq (t-u)^{\dfrac{p-2}{p}} \E \displaystyle \int_u^t |f_s|^p ds = (t-u)^{\dfrac{p-2}{p}} \displaystyle \int_u^t \E |f_s|^p ds. \]
+   Đặc biệt, nếu $\displaystyle\sup_s |f_s|^p \leq M$ thì $I \leq M (t-u)^{\dfrac{p}{2}}$.\\  
+Đặt $X_t = \displaystyle \int_0^t f_s dB_s$ thì từ ví dụ trên ta có
+\[E \left|X_t-X_s\right|^p \leq M|t-s|^{\dfrac{p}{2}}.\]
+Như vậy, nếu tồn tại $p>2$ thoả mãn $\displaystyle\sup_s \E |f_s|^p \leq M$ thì các quỹ đạo cua $X_t$ là liên tục.
+\end{sol*}
+\end{exam*}
+\begin{exam*}
+\begin{itemize}
+    \item[i)] Xét quá trình ngẫu nhiên $X_t = \displaystyle \int_0^t sinB_s dB_s$, $t \in [0,T]$. Chứng minh rằng: 
+    \[\E |X_t-X_s|^p \leq c |t-s|^{\dfrac{p}{2}} \quad \forall t,s \in [0,T], p \geq 2\]
+    trong đó $c>0$ là một hằng số nào đó.
+    \item[ii)] Tương tự chứng minh rằng  $Y_t = \displaystyle \int_0^t sinB_s ds$ thoả mãn:
+    \[\E |Y_t-Y_s|^p \leq c |t-s|^p.\]
+\end{itemize}
+\begin{sol*}
+    \begin{itemize}
+        \item[i)] Vì $\displaystyle\sup_s \E |sinB_s|^p \leq \E(1) = 1 = c$ nên $\E |X_t-X_s|^p \leq c |t-s|^{\dfrac{p}{2}}$.
+        \item[ii)] Giả sử với $s \leq t$:
+        \begin{align*}
+            |Y_t-Y_s|^p &= \left|\displaystyle \int_0^t sinB_u du - \displaystyle \int_0^s sinB_u du \right|^p\\
+            &= \left|\displaystyle \int_s^t sinB_u du \right|^p\\
+            &\leq \left(\displaystyle \int_s^t |sinB_u| du \right)^p\\
+            &\leq \left(\displaystyle \int_s^t 1 du \right)^p = |t-a|^p.   
+        \end{align*}
+        Cho nên: $\E |Y_t-Y_s|^p \leq c |t-s|^p.$
+    \end{itemize}
+\end{sol*}
+\end{exam*}
+\begin{exam*}
+Xét quá trình ngẫu nhiên $X_t = \displaystyle \int_0^t B_s dB_s + \displaystyle \int_0^t B_s^2 dB_s$ với $0 \leq t \leq T$. Chứng minh rằng:
+\[\E |X_t-X_s|^p \leq c |t-s|^{\dfrac{p}{2}}  \quad \forall t,s \in [0,T], p \geq 2.\]
+\begin{sol*}
+    Ta có bất đẳng thức: $(a+b)^p \leq 2^{p-1}(a^p+b^p) \quad \forall a,b>0$. Vì vậy:
+    \begin{align*}
+        |X_t-X_s|^p &= \left|\displaystyle \int_s^t B_u du + \displaystyle \int_s^t B_u^2 du \right|^p\\
+        &\leq 2^{p-1} \left( \left|\displaystyle \int_s^t B_u du \right|^p+  \left|\displaystyle \int_s^t B_u^2 du \right|^p \right).
+    \end{align*}
+    Do đó: \[\E |X_t-X_s|^p \leq 2^{p-1} \E \left|\displaystyle \int_s^t B_u du \right|^p + 2^{p-1} \E \left|\displaystyle \int_s^t B_u^2 du \right|^p.\]
+    Áp dụng bất đẳng thức B-D-G và Holder ta có:
+    \begin{align*}
+        \E |X_t-X_s|^p 
+        &\leq 2^{p-1} \E \displaystyle \int_s^t |B_u|^p du \cdot (t-s)^{p-1} + 2^{p-1} C_p \E \left(\displaystyle \int_s^t B_u^4 du\right)^{\dfrac{p}{2}}\\
+        &\leq 2^{p-1} \displaystyle \int_s^t \E|B_u|^p du \cdot (t-s)^{p-1} + 2^{p-1} C_p \displaystyle \int_s^t \E|B_u|^{2p} du \cdot (t-s)^{\dfrac{p}{2}-1}.
+    \end{align*}
+    Vì $\displaystyle\sup_s \E|B_u|^p + \displaystyle\sup_s \E|B_u|^{2p} \leq M \quad \forall u \in [0,T]$ nên:
+    \begin{align*}
+        \E |X_t-X_s|^p &\leq 2^{p-1} M \left((t-s)^p + (t-s)^{\dfrac{p}{2}}\right)\\
+        &\leq 2^{p-1} M \left(T^{\dfrac{p}{2}}(t-s)^{\dfrac{p}{2}} + (t-s)^{\dfrac{p}{2}}\right)\\
+        &\leq 2^{p-1} M (t-s)^{\dfrac{p}{2}} \left(T^{\dfrac{p}{2}}+1\right) = c |t-s|^{\dfrac{p}{2}}.
+    \end{align*}
+\end{sol*}
+\end{exam*}
+% ---------------------------------------------------------------------
